@@ -1,3 +1,4 @@
 tmp/*
 logs/*
-vender/*
+vendor/*
+composer.lock
