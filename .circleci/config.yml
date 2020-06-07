@@ -2,7 +2,11 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@1.1.0
+
 jobs:
   build:
     docker:
@@ -40,3 +44,16 @@ jobs:
             - ./vendor
 
       - run: ./vendor/bin/phpunit
+
+  deploy:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup
+      - run: eb deploy AnniversaryReminderApache-env
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy
