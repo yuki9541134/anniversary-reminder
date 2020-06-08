@@ -5,7 +5,20 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class PreciousUsersFixture extends TestFixture
 {
-    public $import = ['table' => 'precious_users'];
+    // public $import = ['model' => 'precious_users'];
+    public $fields = [
+        'id' => ['type' => 'integer'],
+        'user_id' => ['type' => 'integer'],
+        'name' => ['type' => 'string', 'length' => 255, 'null' => false],
+        'gender' => ['type' => 'integer'],
+        'relation' => ['type' => 'integer'],
+        'created' => 'datetime',
+        'modified' => 'datetime',
+        '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['id']],
+        ]
+    ];
+
     public $records = [
         [
             'user_id' => '0',
