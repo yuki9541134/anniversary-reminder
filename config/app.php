@@ -3,7 +3,7 @@
 if (isset($_SERVER['RDS_HOSTNAME'])) {
     $db_default = [
         'className' => 'Cake\Database\Connection',
-        'driver' => 'Cake\Database\Driver\Mysql',
+        'driver' => 'Cake\Database\Driver\Sqlite',
         'persistent' => false,
         'host' => $_SERVER['RDS_HOSTNAME'],
         'username' => $_SERVER['RDS_USERNAME'],
@@ -21,7 +21,7 @@ if (isset($_SERVER['RDS_HOSTNAME'])) {
 } else {
     $db_default = [
         'className' => 'Cake\Database\Connection',
-        'driver' => 'Cake\Database\Driver\Mysql',
+        'driver' => 'Cake\Database\Driver\Sqlite',
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'root',
