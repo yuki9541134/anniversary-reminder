@@ -5,7 +5,6 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class PreciousUsersFixture extends TestFixture
 {
-    // public $import = ['model' => 'precious_users'];
     public $fields = [
         'id' => ['type' => 'integer'],
         'user_id' => ['type' => 'integer'],
