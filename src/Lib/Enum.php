@@ -1,5 +1,5 @@
 <?php
-namespace Enum; 
+namespace Lib\Enum; 
 
 abstract class Enum {
     private $value;
@@ -23,7 +23,7 @@ abstract class Enum {
         return (string)$this->value;
     }
 
-    public function __callStatic($method, array $args)
+    public static function __callStatic($method, array $args)
     {
         return new self($method);
     }

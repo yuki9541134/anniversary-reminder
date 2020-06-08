@@ -9,4 +9,10 @@ class PreciousUsersTable extends Table
     {
         $this->addBehavior('Timestamp');
     }
+
+    public function findPreciousUsers()
+    {
+        $query = $this->find();
+        return $query;
+    }
 }
