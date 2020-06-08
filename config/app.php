@@ -8,7 +8,7 @@ if (isset($_SERVER['RDS_HOSTNAME'])) {
         'host' => $_SERVER['RDS_HOSTNAME'],
         'username' => $_SERVER['RDS_USERNAME'],
         'password' => $_SERVER['RDS_PASSWORD'],
-        'database' => $_SERVER['RDS_DB_NAME'],
+        'database' => 'anniversary',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
         'flags' => [],
