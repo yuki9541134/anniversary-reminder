@@ -23,7 +23,7 @@ abstract class Enum {
         return (string)$this->value;
     }
 
-    public function __callStatic($method, array $args)
+    public static function __callStatic($method, array $args)
     {
         return new self($method);
     }
@@ -46,5 +46,6 @@ final class Relation extends Enum {
     const ENUM = [
         0 => "父親",
         1 => "母親",
+        2 => "彼女",
     ];
 }
