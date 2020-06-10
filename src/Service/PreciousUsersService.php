@@ -14,6 +14,10 @@ class PreciousUsersService extends AppService
         $this->PreciousUsers = TableRegistry::get('PreciousUsers');
     }
 
+    /**
+     * 大切な人一覧を取得する
+     * @return Query
+     */
     public function getPreciousUsers()
     {
         return $this->PreciousUsers->findPreciousUsers();

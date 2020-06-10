@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Service\PreciousUsersService;
 
+/**
+ * @property PreciousUsersService $PreciousUsersService
+ */
 class PreciousUsersController extends AppController
 {
     public function index()

@@ -10,9 +10,12 @@ class PreciousUsersTable extends Table
         $this->addBehavior('Timestamp');
     }
 
+    /**
+     * 大切な人一覧を取得するクエリを取得
+     * @return \Cake\ORM\Query
+     */
     public function findPreciousUsers()
     {
-        $query = $this->find();
-        return $query;
+        return $this->find();
     }
 }
