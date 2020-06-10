@@ -4,7 +4,7 @@ namespace App\Test\TestCase\Service;
 use App\Service\PreciousUsersService;
 use Cake\TestSuite\TestCase;
 
-class ProductsServiceTest extends TestCase
+class PreciousUsersServiceTest extends TestCase
 {
     /**
      * setUp method
