@@ -10,6 +10,11 @@ class PreciousUsersTableTest extends TestCase
 {
     public $fixtures = ['app.PreciousUsers'];
 
+    /**
+     * setUp method
+     * @return void
+     * テスト前に毎回実行される
+     */
     public function setUp()
     {
         parent::setUp();
