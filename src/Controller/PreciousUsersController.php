@@ -1,20 +1,18 @@
 <?php
 namespace App\Controller;
 
-require dirname(__FILE__) .'/../Lib/Enum.php';
-use Enum\Gender;
-use Enum\Relation;
+use App\Service\PreciousUsersService;
 
+/**
+ * @property PreciousUsersService $PreciousUsersService
+ */
 class PreciousUsersController extends AppController
 {
     public function index()
     {
+        $this->PreciousUsersService = new PreciousUsersService();
         $this->loadComponent('Paginator');
-        $precious_users = $this->Paginator->paginate($this->PreciousUsers->find());
-        foreach ($precious_users as $precious_user) {
-            $precious_user->gender = new Gender($precious_user->gender);
-            $precious_user->relation = new Relation($precious_user->relation);
-        }
+        $precious_users = $this->Paginator->paginate($this->PreciousUsersService->getPreciousUsers());
         $this->set(compact('precious_users'));
     }
 }

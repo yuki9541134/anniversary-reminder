@@ -12,10 +12,10 @@
             <?= $precious_user->name ?>
         </td>
         <td>
-            <?= $precious_user->gender ?>
+            <?= $precious_user->getGender() ?>
         </td>
         <td>
-            <?= $precious_user->relation ?>
+            <?= $precious_user->getRelation() ?>
         </td>
     </tr>
     <?php endforeach; ?>
