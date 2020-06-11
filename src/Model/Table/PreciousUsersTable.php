@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\Validation\Validator;
 
 class PreciousUsersTable extends Table
 {
@@ -17,5 +18,19 @@ class PreciousUsersTable extends Table
     public function findPreciousUsers()
     {
         return $this->find();
+    }
+
+    /**
+     * 大切な人のバリデーション
+     * @param Cake\Validation\Validator
+     * @return Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->minLength('name', 1)
+            ->maxLength('name', 255);
+
+        return $validator;
     }
 }

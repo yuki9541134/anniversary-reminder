@@ -20,3 +20,5 @@
     </tr>
     <?php endforeach; ?>
 </table>
+
+<?= $this->Html->link('大切な人を追加する', ['action' => 'add']) ?>

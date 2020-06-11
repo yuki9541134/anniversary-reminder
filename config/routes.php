@@ -58,6 +58,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     // 大切な人ページ
     $routes->connect('/precious-users/index', ['controller' => 'PreciousUsers', 'action' => 'index']);
+    $routes->connect('/precious-users/add', ['controller' => 'PreciousUsers', 'action' => 'add']);
 
 });
 
