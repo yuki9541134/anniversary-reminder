@@ -16,11 +16,11 @@ class PreciousUsersController extends AppController
         parent::initialize();
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash');
+        $this->PreciousUsersService = new PreciousUsersService();
     }
 
     public function index()
     {
-        $this->PreciousUsersService = new PreciousUsersService();
         $precious_users = $this->Paginator->paginate($this->PreciousUsersService->getPreciousUsers());
         $this->set(compact('precious_users'));
     }
