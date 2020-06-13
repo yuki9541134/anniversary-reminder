@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -13,7 +14,7 @@ class PreciousUsersTable extends Table
 
     /**
      * 大切な人一覧を取得するクエリを取得
-     * @return \Cake\ORM\Query
+     * @return Query
      */
     public function findPreciousUsers()
     {
@@ -32,8 +33,8 @@ class PreciousUsersTable extends Table
 
     /**
      * 大切な人のバリデーション
-     * @param Cake\Validation\Validator
-     * @return Cake\Validation\Validator
+     * @param Validator $validator
+     * @return Validator
      */
     public function validationDefault(Validator $validator)
     {

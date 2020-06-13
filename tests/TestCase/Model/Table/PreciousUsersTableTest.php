@@ -1,7 +1,6 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\PreciousUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cake\I18n\FrozenTime;
@@ -9,6 +8,7 @@ use Cake\I18n\FrozenTime;
 class PreciousUsersTableTest extends TestCase
 {
     public $fixtures = ['app.PreciousUsers'];
+    private $PreciousUsers;
 
     /**
      * setUp method
@@ -21,6 +21,10 @@ class PreciousUsersTableTest extends TestCase
         $this->PreciousUsers = TableRegistry::getTableLocator()->get('PreciousUsers');
     }
 
+    /**
+     * 正常系
+     * @return void
+     */
     public function testFind()
     {
         $query = $this->PreciousUsers->findPreciousUsers();
@@ -34,6 +38,7 @@ class PreciousUsersTableTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
+    
     /**
     * Validation 正常系
     * @return void
@@ -49,6 +54,7 @@ class PreciousUsersTableTest extends TestCase
         $precious_user = $this->PreciousUsers->newEntity($data);
         $this->assertEmpty($precious_user->getErrors());
     }
+    
     /**
      * Validation 異常系 nameが空のとき
      * @return void
@@ -62,8 +68,9 @@ class PreciousUsersTableTest extends TestCase
             'relation' => 0,
         ];
         $precious_user = $this->PreciousUsers->newEntity($data);
-        $this->assertNotEmpty($precious_user->getErrors('name'));
+        $this->assertNotEmpty($precious_user->getErrors());
     }
+    
     /**
      * Validation 異常系 nameが256文字以上
      * @return void
@@ -77,6 +84,6 @@ class PreciousUsersTableTest extends TestCase
             'relation' => 0,
         ];
         $precious_user = $this->PreciousUsers->newEntity($data);
-        $this->assertNotEmpty($precious_user->getErrors('name'));
+        $this->assertNotEmpty($precious_user->getErrors());
     }
 }

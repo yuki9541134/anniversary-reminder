@@ -6,6 +6,8 @@ use Cake\TestSuite\TestCase;
 
 class PreciousUsersServiceTest extends TestCase
 {
+    private $PreciousUsersService;
+
     /**
      * setUp method
      * @return void
@@ -17,6 +19,10 @@ class PreciousUsersServiceTest extends TestCase
         $this->PreciousUsersService = new PreciousUsersService;
     }
 
+    /**
+     * 正常系
+     * @return void
+     */
     public function testGetPreciousUsers()
     {     
         $query = $this->PreciousUsersService->getPreciousUsers(); 
