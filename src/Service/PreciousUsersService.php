@@ -22,4 +22,13 @@ class PreciousUsersService extends AppService
     {
         return $this->PreciousUsers->findPreciousUsers();
     }
+    /**
+     * 大切な人を登録する
+     * @param $precious_user
+     * @return boolean
+     */
+    public function addPreciousUser($precious_user)
+    {
+        return $this->PreciousUsers->addPreciousUser($precious_user);
+    }
 } 

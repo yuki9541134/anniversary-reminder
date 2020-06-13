@@ -21,6 +21,16 @@ class PreciousUsersTable extends Table
     }
 
     /**
+     * 大切な人を登録する
+     * @param $precious_user
+     * @return boolean
+     */
+    public function addPreciousUser($precious_user)
+    {
+        return $this->save($this->newEntity($precious_user));
+    }
+
+    /**
      * 大切な人のバリデーション
      * @param Cake\Validation\Validator
      * @return Cake\Validation\Validator
