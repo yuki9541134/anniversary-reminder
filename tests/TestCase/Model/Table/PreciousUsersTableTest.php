@@ -34,4 +34,49 @@ class PreciousUsersTableTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
+    /**
+    * Validation 正常系
+    * @return void
+    */
+    public function testValidationDefaultSuccess()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = $this->PreciousUsers->newEntity($data);
+        $this->assertEmpty($precious_user->getErrors());
+    }
+    /**
+     * Validation 異常系 nameが空のとき
+     * @return void
+     */
+    public function testValidationDefaultFailedWithEmptyName()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => '',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = $this->PreciousUsers->newEntity($data);
+        $this->assertNotEmpty($precious_user->getErrors('name'));
+    }
+    /**
+     * Validation 異常系 nameが256文字以上
+     * @return void
+     */
+    public function testValidationDefaultFailedWithTooLongName()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => str_repeat("a", 1000),
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = $this->PreciousUsers->newEntity($data);
+        $this->assertNotEmpty($precious_user->getErrors('name'));
+    }
 }

@@ -7,3 +7,6 @@ composer.lock
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# JetBrains IDE
+.idea/
