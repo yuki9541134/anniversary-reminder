@@ -7,6 +7,7 @@ use Cake\TestSuite\TestCase;
 class PreciousUsersServiceTest extends TestCase
 {
     private $PreciousUsersService;
+    public $fixtures = ['app.PreciousUsers'];
 
     /**
      * setUp method
@@ -27,5 +28,21 @@ class PreciousUsersServiceTest extends TestCase
     {     
         $query = $this->PreciousUsersService->getPreciousUsers(); 
         $this->assertInstanceOf('Cake\ORM\Query', $query);
+    }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testAddPreciousUser()
+    {
+        $precious_user = [
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $result = $this->PreciousUsersService->addPreciousUser($precious_user);
+        $this->assertInstanceOf('Cake\ORM\Entity', $result);
     }
 }
