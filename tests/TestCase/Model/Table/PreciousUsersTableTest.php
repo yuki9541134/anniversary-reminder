@@ -38,6 +38,39 @@ class PreciousUsersTableTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testAddPreciousUserSuccess()
+    {
+        $precious_user = [
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $result = $this->PreciousUsers->addPreciousUser($precious_user);
+        $this->assertInstanceOf('Cake\ORM\Entity', $result);
+        $this->assertEquals('aaa', $result->name);
+    }
+
+    /**
+     * 異常系 nameが空の時
+     * @return void
+     */
+    public function testAddPreciousUserFailed()
+    {
+        $precious_user = [
+            'user_id' => 1,
+            'name' => '',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $result = $this->PreciousUsers->addPreciousUser($precious_user);
+        $this->assertEquals(false, $result);
+    }
     
     /**
     * Validation 正常系

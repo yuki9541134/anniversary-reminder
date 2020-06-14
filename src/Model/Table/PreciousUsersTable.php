@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -23,10 +24,10 @@ class PreciousUsersTable extends Table
 
     /**
      * 大切な人を登録する
-     * @param $precious_user
-     * @return boolean
+     * @param array $precious_user
+     * @return Entity|boolean
      */
-    public function addPreciousUser($precious_user)
+    public function addPreciousUser(array $precious_user)
     {
         return $this->save($this->newEntity($precious_user));
     }
