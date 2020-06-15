@@ -6,6 +6,7 @@ use Cake\TestSuite\IntegrationTestCase;
 class PreciousUsersControllerTest extends IntegrationTestCase
 {
     public $fixtures = ['app.PreciousUsers'];
+
     /**
      * 正常系
      * @retrun void
@@ -15,6 +16,7 @@ class PreciousUsersControllerTest extends IntegrationTestCase
         $this->get('/precious-users/index');
         $this->assertResponseOk();
     }
+
     /**
      * 正常系
      * @retrun void
@@ -24,6 +26,7 @@ class PreciousUsersControllerTest extends IntegrationTestCase
         $this->get('/precious-users/new');
         $this->assertResponseOk();
     }
+
     /**
      * 正常系
      * @retrun void
@@ -40,6 +43,7 @@ class PreciousUsersControllerTest extends IntegrationTestCase
         $this->assertRedirect('/precious-users/index');
         $this->assertSession('大切な人を追加しました。', 'Flash.flash.0.message');
     }
+
     /**
      * 異常系（nameが空のとき）
      * @retrun void
