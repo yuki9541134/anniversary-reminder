@@ -1,10 +1,14 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
+use App\Model\Table\PreciousUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cake\I18n\FrozenTime;
 
+/**
+ * @property PreciousUsersTable $PreciousUsers
+ */
 class PreciousUsersTableTest extends TestCase
 {
     public $fixtures = ['app.PreciousUsers'];

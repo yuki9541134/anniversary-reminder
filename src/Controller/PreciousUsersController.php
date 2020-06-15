@@ -2,13 +2,14 @@
 namespace App\Controller;
 
 use App\Service\PreciousUsersService;
-
+use App\Model\Table\PreciousUsersTable;
 use Cake\Http\Response;
 use Lib\Enum\Gender;
 use Lib\Enum\Relation;
 
 /**
  * @property PreciousUsersService $PreciousUsersService
+ * @property PreciousUsersTable $PreciousUsers
  */
 class PreciousUsersController extends AppController
 {

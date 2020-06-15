@@ -1,9 +1,12 @@
 <?php
 namespace App\Test\TestCase\Service;
-
+;
 use App\Service\PreciousUsersService;
 use Cake\TestSuite\TestCase;
 
+/**
+ * @property PreciousUsersService $PreciousUsersService
+ */
 class PreciousUsersServiceTest extends TestCase
 {
     private $PreciousUsersService;

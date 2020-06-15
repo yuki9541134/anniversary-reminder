@@ -1,9 +1,13 @@
 <?php
 namespace App\Service;
 
+use App\Model\Table\PreciousUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\ORM\Query;
 
+/**
+ * @property PreciousUsersTable $PreciousUsers
+ */
 class PreciousUsersService extends AppService
 {
     private $PreciousUsers;
