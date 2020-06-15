@@ -1,6 +1,8 @@
 <?php
 namespace App\Test\TestCase\Service;
 ;
+
+use App\Model\Entity\PreciousUser;
 use App\Service\PreciousUsersService;
 use Cake\TestSuite\TestCase;
 
@@ -39,12 +41,13 @@ class PreciousUsersServiceTest extends TestCase
      */
     public function testAddPreciousUser()
     {
-        $precious_user = [
+        $data = [
             'user_id' => 1,
             'name' => 'aaa',
             'gender' => 0,
             'relation' => 0,
         ];
+        $precious_user = new PreciousUser($data);
         $result = $this->PreciousUsersService->addPreciousUser($precious_user);
         $this->assertInstanceOf('Cake\ORM\Entity', $result);
     }

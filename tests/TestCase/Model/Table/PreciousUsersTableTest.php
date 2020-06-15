@@ -1,6 +1,7 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
+use App\Model\Entity\PreciousUser;
 use App\Model\Table\PreciousUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
@@ -49,12 +50,12 @@ class PreciousUsersTableTest extends TestCase
      */
     public function testAddPreciousUserSuccess()
     {
-        $precious_user = [
+        $precious_user = $this->PreciousUsers->newEntity([
             'user_id' => 1,
             'name' => 'aaa',
             'gender' => 0,
             'relation' => 0,
-        ];
+        ]);
         $result = $this->PreciousUsers->addPreciousUser($precious_user);
         $this->assertInstanceOf('Cake\ORM\Entity', $result);
         $this->assertEquals('aaa', $result->name);
@@ -66,12 +67,12 @@ class PreciousUsersTableTest extends TestCase
      */
     public function testAddPreciousUserFailed()
     {
-        $precious_user = [
+        $precious_user = $this->PreciousUsers->newEntity([
             'user_id' => 1,
             'name' => '',
             'gender' => 0,
             'relation' => 0,
-        ];
+        ]);
         $result = $this->PreciousUsers->addPreciousUser($precious_user);
         $this->assertEquals(false, $result);
     }

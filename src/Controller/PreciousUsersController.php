@@ -49,7 +49,8 @@ class PreciousUsersController extends AppController
      */
     public function add()
     {
-        if ($this->PreciousUsersService->addPreciousUser($this->request->getData())) {
+        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+        if ($this->PreciousUsersService->addPreciousUser($precious_user)) {
             $this->Flash->success(__('大切な人を追加しました。'));
             return $this->redirect(['action' => 'index']);
         }

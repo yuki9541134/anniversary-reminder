@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Model\Entity\PreciousUser;
 use App\Model\Table\PreciousUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\ORM\Query;
@@ -29,10 +30,10 @@ class PreciousUsersService extends AppService
 
     /**
      * 大切な人を登録する
-     * @param array $precious_user
-     * @return boolean
+     * @param PreciousUser $precious_user
+     * @return PreciousUser|boolean
      */
-    public function addPreciousUser(array $precious_user)
+    public function addPreciousUser(PreciousUser $precious_user)
     {
         return $this->PreciousUsers->addPreciousUser($precious_user);
     }
