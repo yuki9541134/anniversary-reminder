@@ -1,7 +1,11 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\PreciousUser;
+use Cake\ORM\Entity;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
+use Cake\Validation\Validator;
 
 class PreciousUsersTable extends Table
 {
@@ -12,10 +16,34 @@ class PreciousUsersTable extends Table
 
     /**
      * 大切な人一覧を取得するクエリを取得
-     * @return \Cake\ORM\Query
+     * @return Query
      */
     public function findPreciousUsers()
     {
         return $this->find();
+    }
+
+    /**
+     * 大切な人を登録する
+     * @param PreciousUser $precious_user
+     * @return PreciousUser|boolean
+     */
+    public function addPreciousUser(PreciousUser $precious_user)
+    {
+        return $this->save($precious_user);
+    }
+
+    /**
+     * 大切な人のバリデーション
+     * @param Validator $validator
+     * @return Validator
+     */
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->minLength('name', 1)
+            ->maxLength('name', 255);
+
+        return $validator;
     }
 }

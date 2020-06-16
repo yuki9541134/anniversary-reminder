@@ -1,14 +1,19 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
+use App\Model\Entity\PreciousUser;
 use App\Model\Table\PreciousUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Cake\I18n\FrozenTime;
 
+/**
+ * @property PreciousUsersTable $PreciousUsers
+ */
 class PreciousUsersTableTest extends TestCase
 {
     public $fixtures = ['app.PreciousUsers'];
+    private $PreciousUsers;
 
     /**
      * setUp method
@@ -21,6 +26,10 @@ class PreciousUsersTableTest extends TestCase
         $this->PreciousUsers = TableRegistry::getTableLocator()->get('PreciousUsers');
     }
 
+    /**
+     * 正常系
+     * @return void
+     */
     public function testFind()
     {
         $query = $this->PreciousUsers->findPreciousUsers();
@@ -33,5 +42,86 @@ class PreciousUsersTableTest extends TestCase
         ];
 
         $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testAddPreciousUserSuccess()
+    {
+        $precious_user = $this->PreciousUsers->newEntity([
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ]);
+        $result = $this->PreciousUsers->addPreciousUser($precious_user);
+        $this->assertInstanceOf('Cake\ORM\Entity', $result);
+        $this->assertEquals('aaa', $result->name);
+    }
+
+    /**
+     * 異常系 nameが空の時
+     * @return void
+     */
+    public function testAddPreciousUserFailed()
+    {
+        $precious_user = $this->PreciousUsers->newEntity([
+            'user_id' => 1,
+            'name' => '',
+            'gender' => 0,
+            'relation' => 0,
+        ]);
+        $result = $this->PreciousUsers->addPreciousUser($precious_user);
+        $this->assertEquals(false, $result);
+    }
+    
+    /**
+    * Validation 正常系
+    * @return void
+    */
+    public function testValidationDefaultSuccess()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = $this->PreciousUsers->newEntity($data);
+        $this->assertEmpty($precious_user->getErrors());
+    }
+    
+    /**
+     * Validation 異常系 nameが空のとき
+     * @return void
+     */
+    public function testValidationDefaultFailedWithEmptyName()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => '',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = $this->PreciousUsers->newEntity($data);
+        $this->assertNotEmpty($precious_user->getErrors());
+    }
+    
+    /**
+     * Validation 異常系 nameが256文字以上
+     * @return void
+     */
+    public function testValidationDefaultFailedWithTooLongName()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => str_repeat("a", 1000),
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = $this->PreciousUsers->newEntity($data);
+        $this->assertNotEmpty($precious_user->getErrors());
     }
 }
