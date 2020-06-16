@@ -4,8 +4,8 @@ namespace App\Controller;
 use App\Service\PreciousUsersService;
 use App\Model\Table\PreciousUsersTable;
 use Cake\Http\Response;
-use Lib\Enum\Gender;
-use Lib\Enum\Relation;
+use App\Enum\Gender;
+use App\Enum\Relation;
 
 /**
  * @property PreciousUsersService $PreciousUsersService
