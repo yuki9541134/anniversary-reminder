@@ -24,6 +24,16 @@ class PreciousUsersTable extends Table
     }
 
     /**
+     * 大切な人を取得する
+     * @param int $id
+     * @return PreciousUser
+     */
+    public function getPreciousUser($id)
+    {
+        return $this->findById($id);
+    }
+
+    /**
      * 大切な人を登録する
      * @param PreciousUser $precious_user
      * @return PreciousUser|boolean

@@ -1,5 +1,5 @@
 <?php
-namespace Lib\Enum; 
+namespace Lib\Enum;
 
 abstract class Enum {
     private $value;

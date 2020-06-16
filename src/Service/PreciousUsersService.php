@@ -29,6 +29,16 @@ class PreciousUsersService extends AppService
     }
 
     /**
+     * 大切な人を取得する
+     * @param int $id
+     * @return PreciousUser
+     */
+    public function getPreciousUser($id)
+    {
+        return $this->PreciousUsers->getPreciousUser($id);
+    }
+
+    /**
      * 大切な人を登録する
      * @param PreciousUser $precious_user
      * @return PreciousUser|boolean

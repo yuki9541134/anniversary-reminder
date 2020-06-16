@@ -57,4 +57,33 @@ class PreciousUsersController extends AppController
         $this->Flash->error(__('大切な人の追加に失敗しました。'));
         return $this->redirect(['action' => 'new']);
     }
+
+    /**
+     * 大切な人編集画面を表示する
+     * @param $id
+     * @return void
+     */
+    public function edit($id)
+    {
+        $precious_user = $this->PreciousUsersService->getPreciousUser($id);
+        $this->set('precious_user', $precious_user);
+        $this->set('gender_selector', Gender::ENUM);
+        $this->set('relation_selector', Relation::ENUM);
+    }
+
+    /**
+     * 大切な人を更新する
+     * @param $id
+     * @return Response|null
+     */
+    public function update($id)
+    {
+        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+        if ($this->PreciousUsersService->addPreciousUser($precious_user)) {
+            $this->Flash->success(__('大切な人を更新しました。'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('大切な人の更新に失敗しました。'));
+        return $this->redirect(['action' => 'edit']);
+    }
 }

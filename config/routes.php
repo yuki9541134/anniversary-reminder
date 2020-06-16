@@ -61,6 +61,10 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/precious-users/new', ['controller' => 'PreciousUsers', 'action' => 'new']);
     $routes->connect('/precious-users/add', ['controller' => 'PreciousUsers', 'action' => 'add'])
         ->setMethods(['POST']);
+    $routes->connect('/precious-users/edit/:id', ['controller' => 'PreciousUsers', 'action' => 'edit'])
+        ->setPass(['id']);
+    $routes->connect('/precious-users/update', ['controller' => 'PreciousUsers', 'action' => 'update'])
+        ->setMethods(['POST']);
 });
 
 /**
