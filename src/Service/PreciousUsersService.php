@@ -57,7 +57,7 @@ class PreciousUsersService extends AppService
      * @param PreciousUser $precious_user
      * @return CallbackStatement|StatementInterface
      */
-    public function updatePreciousUser($target_precious_user_id, PreciousUser $precious_user)
+    public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user)
     {
         return $this->PreciousUsers->updatePreciousUser($target_precious_user_id, $precious_user);
     }
