@@ -2,6 +2,9 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\PreciousUser;
+use Cake\Database\Statement\CallbackStatement;
+use Cake\Database\StatementInterface;
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
@@ -26,11 +29,11 @@ class PreciousUsersTable extends Table
     /**
      * 大切な人を取得する
      * @param int $id
-     * @return PreciousUser
+     * @return array|EntityInterface
      */
     public function getPreciousUser($id)
     {
-        return $this->findById($id);
+        return $this->get($id);
     }
 
     /**
@@ -41,6 +44,25 @@ class PreciousUsersTable extends Table
     public function addPreciousUser(PreciousUser $precious_user)
     {
         return $this->save($precious_user);
+    }
+
+    /**
+     * 大切な人を更新する
+     * @param int $id
+     * @param PreciousUser $precious_user
+     * @return CallbackStatement|StatementInterface
+     */
+    public function updatePreciousUser($id, PreciousUser $precious_user)
+    {
+        return $this->query()
+            ->update()
+            ->set([
+                'name' => $precious_user->name,
+                'relation' => $precious_user->relation,
+                'gender' => $precious_user->gender,
+            ])
+            ->where(['id' => $id])
+            ->execute();
     }
 
     /**

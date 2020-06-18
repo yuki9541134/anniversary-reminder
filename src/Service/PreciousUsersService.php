@@ -3,6 +3,9 @@ namespace App\Service;
 
 use App\Model\Entity\PreciousUser;
 use App\Model\Table\PreciousUsersTable;
+use Cake\Database\Statement\CallbackStatement;
+use Cake\Database\StatementInterface;
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
 use Cake\ORM\Query;
 
@@ -31,7 +34,7 @@ class PreciousUsersService extends AppService
     /**
      * 大切な人を取得する
      * @param int $id
-     * @return PreciousUser
+     * @return array|EntityInterface
      */
     public function getPreciousUser($id)
     {
@@ -46,5 +49,16 @@ class PreciousUsersService extends AppService
     public function addPreciousUser(PreciousUser $precious_user)
     {
         return $this->PreciousUsers->addPreciousUser($precious_user);
+    }
+
+    /**
+     * 大切な人を更新する
+     * @param int $id
+     * @param PreciousUser $precious_user
+     * @return CallbackStatement|StatementInterface
+     */
+    public function updatePreciousUser($id, PreciousUser $precious_user)
+    {
+        return $this->PreciousUsers->updatePreciousUser($id, $precious_user);
     }
 } 

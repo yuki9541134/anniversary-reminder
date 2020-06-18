@@ -31,7 +31,7 @@ if (isset($_SERVER['RDS_HOSTNAME'])) {
         'timezone' => 'UTC',
         'flags' => [],
         'cacheMetadata' => true,
-        'log' => false,
+        'log' => true,
         'quoteIdentifiers' => false,
         'url' => env('DATABASE_URL', null),
     ];
@@ -271,7 +271,7 @@ return [
             'timezone' => 'UTC',
             'cacheMetadata' => true,
             'quoteIdentifiers' => false,
-            'log' => false,
+            'log' => true,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
             'url' => env('DATABASE_TEST_URL', null),
         ],

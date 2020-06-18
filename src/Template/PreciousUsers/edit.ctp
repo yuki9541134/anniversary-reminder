@@ -2,6 +2,7 @@
 <?php
 echo $this->Form->create($precious_user, ['url' => '/precious-users/update']);
     // TODO: user_idを入れる
+    echo $this->Form->control('id', ['type' => 'hidden']);
     echo $this->Form->control('user_id', ['type' => 'hidden', 'value' => 1]);
     echo $this->Form->control('name', ['label' => '名前']);
     echo $this->Form->label('性別');

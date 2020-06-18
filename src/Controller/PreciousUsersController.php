@@ -66,6 +66,7 @@ class PreciousUsersController extends AppController
     public function edit($id)
     {
         $precious_user = $this->PreciousUsersService->getPreciousUser($id);
+        $this->set('id', $id);
         $this->set('precious_user', $precious_user);
         $this->set('gender_selector', Gender::ENUM);
         $this->set('relation_selector', Relation::ENUM);
@@ -73,13 +74,13 @@ class PreciousUsersController extends AppController
 
     /**
      * 大切な人を更新する
-     * @param $id
      * @return Response|null
      */
-    public function update($id)
+    public function update()
     {
         $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
-        if ($this->PreciousUsersService->addPreciousUser($precious_user)) {
+        $id = $this->request->getData('id');
+        if ($this->PreciousUsersService->updatePreciousUser($id, $precious_user)) {
             $this->Flash->success(__('大切な人を更新しました。'));
             return $this->redirect(['action' => 'index']);
         }

@@ -1,8 +1,6 @@
 <?php
 namespace App\Model\Entity;
 
-//require dirname(__FILE__) . '/../../Enum/AppEnum.php';
-
 use Cake\ORM\Entity;
 use App\Enum\Gender;
 use App\Enum\Relation;
