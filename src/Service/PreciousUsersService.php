@@ -55,10 +55,14 @@ class PreciousUsersService extends AppService
      * 大切な人を更新する
      * @param int $target_precious_user_id
      * @param PreciousUser $precious_user
-     * @return int
+     * @return boolean
      */
     public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user)
     {
-        return $this->PreciousUsers->updatePreciousUser($target_precious_user_id, $precious_user);
+        if ($this->getPreciousUser($target_precious_user_id) != null){
+            $this->PreciousUsers->updatePreciousUser($target_precious_user_id, $precious_user);
+            return true;
+        }
+        return false;
     }
 } 

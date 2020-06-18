@@ -66,7 +66,7 @@ class PreciousUsersServiceTest extends TestCase
      * 正常系
      * @return void
      */
-    public function testUpdatePreciousUser()
+    public function testUpdatePreciousUserSuccess()
     {
         $data = [
             'user_id' => 1,
@@ -76,6 +76,23 @@ class PreciousUsersServiceTest extends TestCase
         ];
         $precious_user = new PreciousUser($data);
         $result = $this->PreciousUsersService->updatePreciousUser(1, $precious_user);
-        $this->assertEquals(1, $result);
+        $this->assertEquals(true, $result);
+    }
+
+    /**
+     * 異常系
+     * @return void
+     */
+    public function testUpdatePreciousUserFailed()
+    {
+        $data = [
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ];
+        $precious_user = new PreciousUser($data);
+        $result = $this->PreciousUsersService->updatePreciousUser(100, $precious_user);
+        $this->assertEquals(false, $result);
     }
 }
