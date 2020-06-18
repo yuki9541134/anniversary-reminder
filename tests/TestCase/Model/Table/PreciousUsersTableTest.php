@@ -48,6 +48,28 @@ class PreciousUsersTableTest extends TestCase
      * 正常系
      * @return void
      */
+    public function testGetPreciousUserSuccess()
+    {
+        $result = $this->PreciousUsers->getPreciousUser(1);
+        $this->assertInstanceOf('App\Model\Entity\PreciousUser', $result);
+        $expected = ['id' => 1, 'user_id' => 0, 'name' => 'First Person', 'gender' => 0, 'relation' => 0, 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')];
+        $this->assertEquals($expected, $result->toArray());
+    }
+
+    /**
+     * 異常系 見つからない時
+     * @return void
+     */
+    public function testGetPreciousUserFailed()
+    {
+        $result = $this->PreciousUsers->getPreciousUser(100);
+        $this->assertEquals(false, $result);
+    }
+
+    /**
+     * 正常系
+     * @return void
+     */
     public function testAddPreciousUserSuccess()
     {
         $precious_user = $this->PreciousUsers->newEntity([

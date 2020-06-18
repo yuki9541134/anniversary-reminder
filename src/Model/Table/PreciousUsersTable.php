@@ -5,6 +5,7 @@ use App\Model\Entity\PreciousUser;
 use Cake\Database\Statement\CallbackStatement;
 use Cake\Database\StatementInterface;
 use Cake\Datasource\EntityInterface;
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
@@ -29,11 +30,15 @@ class PreciousUsersTable extends Table
     /**
      * 大切な人を取得する
      * @param int $id
-     * @return array|EntityInterface
+     * @return PreciousUser|boolean
      */
     public function getPreciousUser($id)
     {
-        return $this->get($id);
+        try {
+            return $this->get($id);
+        } catch (RecordNotFoundException $e) {
+            return false;
+        }
     }
 
     /**
