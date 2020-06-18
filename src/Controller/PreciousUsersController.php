@@ -61,11 +61,14 @@ class PreciousUsersController extends AppController
     /**
      * 大切な人編集画面を表示する
      * @param $id
-     * @return void
+     * @return Response|null
      */
     public function edit($id)
     {
         $precious_user = $this->PreciousUsersService->getPreciousUser($id);
+        if ($precious_user == null) {
+            return $this->redirect(['action' => 'index']);
+        }
         $this->set('id', $id);
         $this->set('precious_user', $precious_user);
         $this->set('gender_selector', Gender::ENUM);
@@ -85,6 +88,6 @@ class PreciousUsersController extends AppController
             return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('大切な人の更新に失敗しました。'));
-        return $this->redirect(['action' => 'edit']);
+        return $this->redirect(['action' => 'edit', $target_precious_user_id]);
     }
 }

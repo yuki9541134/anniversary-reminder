@@ -30,14 +30,14 @@ class PreciousUsersTable extends Table
     /**
      * 大切な人を取得する
      * @param int $id
-     * @return PreciousUser|boolean
+     * @return PreciousUser|null
      */
     public function getPreciousUser($id)
     {
         try {
             return $this->get($id);
         } catch (RecordNotFoundException $e) {
-            return false;
+            return null;
         }
     }
 

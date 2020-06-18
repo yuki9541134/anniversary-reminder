@@ -63,7 +63,7 @@ class PreciousUsersTableTest extends TestCase
     public function testGetPreciousUserFailed()
     {
         $result = $this->PreciousUsers->getPreciousUser(100);
-        $this->assertEquals(false, $result);
+        $this->assertEquals(null, $result);
     }
 
     /**

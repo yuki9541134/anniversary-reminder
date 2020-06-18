@@ -34,7 +34,7 @@ class PreciousUsersService extends AppService
     /**
      * 大切な人を取得する
      * @param int $id
-     * @return PreciousUser|boolean
+     * @return PreciousUser|null
      */
     public function getPreciousUser(int $id)
     {
