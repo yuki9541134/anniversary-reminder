@@ -1,6 +1,6 @@
 <h1>大切な人を編集する</h1>
 <?php
-echo $this->Form->create($precious_user, ['url' => '/precious-users/update']);
+echo $this->Form->create($precious_user, ['url' => '/precious-users/update', 'type' => 'put']);
     // TODO: user_idを入れる
     echo $this->Form->control('id', ['type' => 'hidden']);
     echo $this->Form->control('user_id', ['type' => 'hidden', 'value' => 1]);
