@@ -79,8 +79,8 @@ class PreciousUsersController extends AppController
     public function update()
     {
         $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
-        $id = $this->request->getData('id');
-        if ($this->PreciousUsersService->updatePreciousUser($id, $precious_user)) {
+        $target_precious_user_id = $this->request->getData('id');
+        if ($this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user)) {
             $this->Flash->success(__('大切な人を更新しました。'));
             return $this->redirect(['action' => 'index']);
         }

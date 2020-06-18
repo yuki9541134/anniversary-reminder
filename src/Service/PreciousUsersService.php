@@ -36,7 +36,7 @@ class PreciousUsersService extends AppService
      * @param int $id
      * @return array|EntityInterface
      */
-    public function getPreciousUser($id)
+    public function getPreciousUser(int $id)
     {
         return $this->PreciousUsers->getPreciousUser($id);
     }
@@ -53,12 +53,12 @@ class PreciousUsersService extends AppService
 
     /**
      * 大切な人を更新する
-     * @param int $id
+     * @param int $target_precious_user_id
      * @param PreciousUser $precious_user
      * @return CallbackStatement|StatementInterface
      */
-    public function updatePreciousUser($id, PreciousUser $precious_user)
+    public function updatePreciousUser($target_precious_user_id, PreciousUser $precious_user)
     {
-        return $this->PreciousUsers->updatePreciousUser($id, $precious_user);
+        return $this->PreciousUsers->updatePreciousUser($target_precious_user_id, $precious_user);
     }
 } 
