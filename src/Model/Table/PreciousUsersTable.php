@@ -55,7 +55,7 @@ class PreciousUsersTable extends Table
      * 大切な人を更新する
      * @param int $target_precious_user_id
      * @param PreciousUser $precious_user
-     * @return CallbackStatement|StatementInterface
+     * @return int
      */
     public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user)
     {
@@ -67,7 +67,8 @@ class PreciousUsersTable extends Table
                 'gender' => $precious_user->gender,
             ])
             ->where(['id' => $target_precious_user_id])
-            ->execute();
+            ->execute()
+            ->rowCount();
     }
 
     /**

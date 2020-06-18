@@ -98,6 +98,38 @@ class PreciousUsersTableTest extends TestCase
         $result = $this->PreciousUsers->addPreciousUser($precious_user);
         $this->assertEquals(false, $result);
     }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testUpdatePreciousUserSuccess()
+    {
+        $precious_user = $this->PreciousUsers->newEntity([
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ]);
+        $result = $this->PreciousUsers->updatePreciousUser(1, $precious_user);
+        $this->assertEquals(1, $result);
+    }
+
+    /**
+     * 準正常系 更新対象が0件
+     * @return void
+     */
+    public function testUpdatePreciousUserNotFound()
+    {
+        $precious_user = $this->PreciousUsers->newEntity([
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ]);
+        $result = $this->PreciousUsers->updatePreciousUser(100, $precious_user);
+        $this->assertEquals(0, $result);
+    }
     
     /**
     * Validation 正常系
