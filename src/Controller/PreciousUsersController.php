@@ -90,4 +90,18 @@ class PreciousUsersController extends AppController
         $this->Flash->error(__('大切な人の更新に失敗しました。'));
         return $this->redirect(['action' => 'edit', $target_precious_user_id]);
     }
+
+    /**
+     * 大切な人を削除する
+     * @return Response
+     */
+    public function delete($id)
+    {
+        if ($this->PreciousUsersService->deletePreciousUser($id)) {
+            $this->Flash->success(__('大切な人を削除しました。'));
+        } else {
+            $this->Flash->error(__('大切な人の削除に失敗しました。'));
+        }
+        return $this->redirect(['action' => 'index']);
+    }
 }

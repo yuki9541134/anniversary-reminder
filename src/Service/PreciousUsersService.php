@@ -65,4 +65,19 @@ class PreciousUsersService extends AppService
         }
         return false;
     }
+
+    /**
+     * 大切な人を削除する
+     * @param int $target_precious_user_id
+     * @return boolean
+     */
+    public function deletePreciousUser(int $target_precious_user_id)
+    {
+        $target_precious_user = $this->getPreciousUser($target_precious_user_id);
+        if ($target_precious_user != null){
+            $this->PreciousUsers->deletePreciousUser($target_precious_user);
+            return true;
+        }
+        return false;
+    }
 } 

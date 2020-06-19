@@ -72,6 +72,16 @@ class PreciousUsersTable extends Table
     }
 
     /**
+     * 大切な人を削除する
+     * @param PreciousUser $precious_user
+     * @return boolean
+     */
+    public function deletePreciousUser(PreciousUser $precious_user)
+    {
+        return $this->delete($precious_user);
+    }
+
+    /**
      * 大切な人のバリデーション
      * @param Validator $validator
      * @return Validator
