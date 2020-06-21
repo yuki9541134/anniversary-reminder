@@ -4,8 +4,8 @@ namespace App\Controller;
 use App\Service\PreciousUsersService;
 use App\Model\Table\PreciousUsersTable;
 use Cake\Http\Response;
-use Lib\Enum\Gender;
-use Lib\Enum\Relation;
+use App\Enum\Gender;
+use App\Enum\Relation;
 
 /**
  * @property PreciousUsersService $PreciousUsersService
@@ -56,5 +56,38 @@ class PreciousUsersController extends AppController
         }
         $this->Flash->error(__('大切な人の追加に失敗しました。'));
         return $this->redirect(['action' => 'new']);
+    }
+
+    /**
+     * 大切な人編集画面を表示する
+     * @param $id
+     * @return Response|null
+     */
+    public function edit($id)
+    {
+        $precious_user = $this->PreciousUsersService->getPreciousUser($id);
+        if ($precious_user == null) {
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->set('id', $id);
+        $this->set('precious_user', $precious_user);
+        $this->set('gender_selector', Gender::ENUM);
+        $this->set('relation_selector', Relation::ENUM);
+    }
+
+    /**
+     * 大切な人を更新する
+     * @return Response|null
+     */
+    public function update()
+    {
+        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+        $target_precious_user_id = $this->request->getData('id');
+        if ($this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user)) {
+            $this->Flash->success(__('大切な人を更新しました。'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('大切な人の更新に失敗しました。'));
+        return $this->redirect(['action' => 'edit', $target_precious_user_id]);
     }
 }

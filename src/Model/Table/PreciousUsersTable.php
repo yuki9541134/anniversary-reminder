@@ -2,6 +2,10 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\PreciousUser;
+use Cake\Database\Statement\CallbackStatement;
+use Cake\Database\StatementInterface;
+use Cake\Datasource\EntityInterface;
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
@@ -24,6 +28,20 @@ class PreciousUsersTable extends Table
     }
 
     /**
+     * 大切な人を取得する
+     * @param int $id
+     * @return PreciousUser|null
+     */
+    public function getPreciousUser(int $id)
+    {
+        try {
+            return $this->get($id);
+        } catch (RecordNotFoundException $e) {
+            return null;
+        }
+    }
+
+    /**
      * 大切な人を登録する
      * @param PreciousUser $precious_user
      * @return PreciousUser|boolean
@@ -31,6 +49,26 @@ class PreciousUsersTable extends Table
     public function addPreciousUser(PreciousUser $precious_user)
     {
         return $this->save($precious_user);
+    }
+
+    /**
+     * 大切な人を更新する
+     * @param int $target_precious_user_id
+     * @param PreciousUser $precious_user
+     * @return int
+     */
+    public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user)
+    {
+        return $this->query()
+            ->update()
+            ->set([
+                'name' => $precious_user->name,
+                'relation' => $precious_user->relation,
+                'gender' => $precious_user->gender,
+            ])
+            ->where(['id' => $target_precious_user_id])
+            ->execute()
+            ->rowCount();
     }
 
     /**

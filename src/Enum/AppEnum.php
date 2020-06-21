@@ -1,7 +1,10 @@
 <?php
-namespace Lib\Enum; 
+namespace App\Enum;
 
-abstract class Enum {
+/**
+ * Enumの基底クラス
+ */
+abstract class AppEnum {
     private $value;
     const ENUM = [];
 
@@ -34,18 +37,3 @@ abstract class Enum {
     }
 }
 
-final class Gender extends Enum {
-    const ENUM = [
-        0 => "男性",
-        1 => "女性",
-        2 => "その他",
-    ];
-}
-
-final class Relation extends Enum {
-    const ENUM = [
-        0 => "父親",
-        1 => "母親",
-        2 => "彼女",
-    ];
-}

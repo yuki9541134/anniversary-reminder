@@ -1,11 +1,9 @@
 <?php
 namespace App\Model\Entity;
 
-require dirname(__FILE__) .'/../../Lib/Enum.php';
-
 use Cake\ORM\Entity;
-use Lib\Enum\Gender;
-use Lib\Enum\Relation;
+use App\Enum\Gender;
+use App\Enum\Relation;
 
 /**
  * 大切な人エンティティ

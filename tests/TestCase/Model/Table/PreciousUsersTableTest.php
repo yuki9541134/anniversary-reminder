@@ -48,6 +48,28 @@ class PreciousUsersTableTest extends TestCase
      * 正常系
      * @return void
      */
+    public function testGetPreciousUserSuccess()
+    {
+        $result = $this->PreciousUsers->getPreciousUser(1);
+        $this->assertInstanceOf('App\Model\Entity\PreciousUser', $result);
+        $expected = ['id' => 1, 'user_id' => 0, 'name' => 'First Person', 'gender' => 0, 'relation' => 0, 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')];
+        $this->assertEquals($expected, $result->toArray());
+    }
+
+    /**
+     * 異常系 見つからない時
+     * @return void
+     */
+    public function testGetPreciousUserFailed()
+    {
+        $result = $this->PreciousUsers->getPreciousUser(100);
+        $this->assertEquals(null, $result);
+    }
+
+    /**
+     * 正常系
+     * @return void
+     */
     public function testAddPreciousUserSuccess()
     {
         $precious_user = $this->PreciousUsers->newEntity([
@@ -75,6 +97,38 @@ class PreciousUsersTableTest extends TestCase
         ]);
         $result = $this->PreciousUsers->addPreciousUser($precious_user);
         $this->assertEquals(false, $result);
+    }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testUpdatePreciousUserSuccess()
+    {
+        $precious_user = $this->PreciousUsers->newEntity([
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ]);
+        $result = $this->PreciousUsers->updatePreciousUser(1, $precious_user);
+        $this->assertEquals(1, $result);
+    }
+
+    /**
+     * 準正常系 更新対象が0件
+     * @return void
+     */
+    public function testUpdatePreciousUserNotFound()
+    {
+        $precious_user = $this->PreciousUsers->newEntity([
+            'user_id' => 1,
+            'name' => 'aaa',
+            'gender' => 0,
+            'relation' => 0,
+        ]);
+        $result = $this->PreciousUsers->updatePreciousUser(100, $precious_user);
+        $this->assertEquals(0, $result);
     }
     
     /**

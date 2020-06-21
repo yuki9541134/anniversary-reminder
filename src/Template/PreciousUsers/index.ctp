@@ -4,6 +4,7 @@
         <th>名前</th>
         <th>性別</th>
         <th>関係</th>
+        <th></th>
     </tr>
 
     <?php foreach ($precious_users as $precious_user): ?>
@@ -16,6 +17,9 @@
         </td>
         <td>
             <?= $precious_user->getRelation() ?>
+        </td>
+        <td>
+            <?= $this->Html->link('編集', ['action' => 'edit', 'id' => $precious_user->id]) ?>
         </td>
     </tr>
     <?php endforeach; ?>
