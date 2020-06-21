@@ -66,8 +66,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/precious-users/update', ['controller' => 'PreciousUsers', 'action' => 'update'])
         ->setMethods(['POST', 'PUT']);
     $routes->connect('/precious-users/delete/:id', ['controller' => 'PreciousUsers', 'action' => 'delete'])
-        //->setMethods(['POST', 'GET', 'DELETE'])
-        ->setPass(['id']);
+        ->setPass(['id'])
+        ->setMethods(['POST','DELETE']);
 });
 
 /**

@@ -22,8 +22,8 @@
             <?= $this->Html->link('編集', ['action' => 'edit', 'id' => $precious_user->id]) ?>
             <?= $this->Form->postLink(
                     '削除',
-                    ['action' => 'delete', 'id' => $precious_user->id],
-                    ['confirm' => '削除してよろしいですか？', 'method' => 'DELETE'])
+                    ['action' => 'delete', 'id' => $precious_user->id, '_method' => 'delete'],
+                    ['confirm' => '削除してよろしいですか？'])
             ?>
         </td>
     </tr>
