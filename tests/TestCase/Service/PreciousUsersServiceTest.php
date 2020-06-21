@@ -3,6 +3,7 @@ namespace App\Test\TestCase\Service;
 
 use App\Model\Entity\PreciousUser;
 use App\Service\PreciousUsersService;
+use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 use Mockery;
 
@@ -11,6 +12,7 @@ use Mockery;
  */
 class PreciousUsersServiceTest extends TestCase
 {
+    public $fixtures = ['app.PreciousUsers'];
     private $PreciousUsersService;
 
     /**
@@ -29,8 +31,12 @@ class PreciousUsersServiceTest extends TestCase
      */
     public function testGetPreciousUsers()
     {
-        $query = $this->PreciousUsersService->getPreciousUsers();
-        $this->assertInstanceOf('Cake\ORM\Query', $query);
+        // setup
+        $this->PreciousUsersService = new PreciousUsersService(TableRegistry::get('PreciousUsers'));
+
+        // test
+        $result = $this->PreciousUsersService->getPreciousUsers();
+        $this->assertInstanceOf('Cake\ORM\Query', $result);
     }
 
     /**
