@@ -136,4 +136,50 @@ class PreciousUsersServiceTest extends TestCase
         $result = $this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user);
         $this->assertEquals(false, $result);
     }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testDeletePreciousUser()
+    {
+        // setup
+        $target_precious_user_id = 1;
+        $precious_user = new PreciousUser();
+
+        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers->shouldReceive('getPreciousUser')
+            ->with($target_precious_user_id)
+            ->once()
+            ->andReturn($precious_user);
+        $PreciousUsers->shouldReceive('deletePreciousUser')
+            ->with($precious_user)
+            ->once();
+        $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
+
+        // test
+        $result = $this->PreciousUsersService->deletePreciousUser($target_precious_user_id);
+        $this->assertEquals(true, $result);
+    }
+
+    /**
+     * 準正常系 削除対象がない時
+     * @return void
+     */
+    public function testDeletePreciousUserNotFound()
+    {
+        // setup
+        $target_precious_user_id = 1;
+
+        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers->shouldReceive('getPreciousUser')
+            ->with($target_precious_user_id)
+            ->once()
+            ->andReturn(null);
+        $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
+
+        // test
+        $result = $this->PreciousUsersService->deletePreciousUser($target_precious_user_id);
+        $this->assertEquals(false, $result);
+    }
 }
