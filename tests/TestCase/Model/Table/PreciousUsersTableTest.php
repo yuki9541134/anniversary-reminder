@@ -130,6 +130,17 @@ class PreciousUsersTableTest extends TestCase
         $result = $this->PreciousUsers->updatePreciousUser(100, $precious_user);
         $this->assertEquals(0, $result);
     }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testDeletePreciousUserSuccess()
+    {
+        $precious_user = $this->PreciousUsers->get(1);
+        $result = $this->PreciousUsers->deletePreciousUser($precious_user);
+        $this->assertEquals(true, $result);
+    }
     
     /**
     * Validation 正常系
