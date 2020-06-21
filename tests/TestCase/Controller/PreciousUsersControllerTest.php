@@ -117,4 +117,26 @@ class PreciousUsersControllerTest extends IntegrationTestCase
         $this->assertRedirect('/precious-users/edit/100');
         $this->assertSession('大切な人の更新に失敗しました。', 'Flash.flash.0.message');
     }
+
+    /**
+     * 正常系
+     * @retrun void
+     */
+    public function testDeleteSuccess()
+    {
+        $this->delete('/precious-users/delete/1');
+        $this->assertRedirect('/precious-users/index');
+        $this->assertSession('大切な人を削除しました。', 'Flash.flash.0.message');
+    }
+
+    /**
+     * 異常系 削除対象がないとき
+     * @retrun void
+     */
+    public function testDeleteFailed()
+    {
+        $this->delete('/precious-users/delete/100');
+        $this->assertRedirect('/precious-users/index');
+        $this->assertSession('大切な人の削除に失敗しました。', 'Flash.flash.0.message');
+    }
 }
