@@ -2,11 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\PreciousUser;
-use Cake\Database\Statement\CallbackStatement;
-use Cake\Database\StatementInterface;
-use Cake\Datasource\EntityInterface;
 use Cake\Datasource\Exception\RecordNotFoundException;
-use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -22,7 +18,7 @@ class PreciousUsersTable extends Table
      * 大切な人一覧を取得するクエリを取得
      * @return Query
      */
-    public function findPreciousUsers()
+    public function findPreciousUsers(): Query
     {
         return $this->find();
     }
@@ -32,7 +28,7 @@ class PreciousUsersTable extends Table
      * @param int $id
      * @return PreciousUser|null
      */
-    public function getPreciousUser($id)
+    public function getPreciousUser($id): ?PreciousUser
     {
         try {
             return $this->get($id);
@@ -57,7 +53,7 @@ class PreciousUsersTable extends Table
      * @param PreciousUser $precious_user
      * @return int
      */
-    public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user)
+    public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user): int
     {
         return $this->query()
             ->update()
@@ -76,7 +72,7 @@ class PreciousUsersTable extends Table
      * @param PreciousUser $precious_user
      * @return boolean
      */
-    public function deletePreciousUser(PreciousUser $precious_user)
+    public function deletePreciousUser(PreciousUser $precious_user): bool
     {
         return $this->delete($precious_user);
     }
@@ -86,7 +82,7 @@ class PreciousUsersTable extends Table
      * @param Validator $validator
      * @return Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->minLength('name', 1)
