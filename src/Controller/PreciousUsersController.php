@@ -61,10 +61,10 @@ class PreciousUsersController extends AppController
 
     /**
      * 大切な人編集画面を表示する
-     * @param $id
+     * @param int $id
      * @return Response|null
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $precious_user = $this->PreciousUsersService->getPreciousUser($id);
         if ($precious_user == null) {
@@ -94,9 +94,10 @@ class PreciousUsersController extends AppController
 
     /**
      * 大切な人を削除する
+     * @param int $id
      * @return Response
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         if ($this->PreciousUsersService->deletePreciousUser($id)) {
             $this->Flash->success(__('大切な人を削除しました。'));
