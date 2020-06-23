@@ -18,7 +18,8 @@ class PreciousUsersController extends AppController
         parent::initialize();
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash');
-        $this->PreciousUsersService = new PreciousUsersService();
+        // serviceにtableを注入する
+        $this->PreciousUsersService = new PreciousUsersService($this->PreciousUsers);
     }
 
     /**
