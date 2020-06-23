@@ -28,7 +28,7 @@ class PreciousUsersTable extends Table
      * @param int $id
      * @return PreciousUser|null
      */
-    public function getPreciousUser($id): ?PreciousUser
+    public function getPreciousUser(int $id) : ?PreciousUser
     {
         try {
             return $this->get($id);
