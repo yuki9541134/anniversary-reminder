@@ -16,6 +16,11 @@ class PreciousUsersService extends AppService
 {
     private $PreciousUsers;
 
+    /**
+     * コンストラクタ
+     * serviceとtableが密結合だとモックが作れないので、疎結合にする。
+     * @param PreciousUsersTable $PreciousUsers
+     */
     public function __construct($PreciousUsers)
     {
         parent::__construct();
