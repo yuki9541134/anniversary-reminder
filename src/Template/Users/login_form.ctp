@@ -4,3 +4,5 @@
 <?= $this->Form->control('password') ?>
 <?= $this->Form->button('ログイン') ?>
 <?= $this->Form->end() ?>
+
+<?= $this->Html->link('ユーザー登録はこちら', ['action' => 'new']) ?>
