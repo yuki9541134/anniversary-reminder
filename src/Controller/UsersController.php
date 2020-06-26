@@ -13,7 +13,7 @@ class UsersController extends AppController
     {
         parent::initialize();
         $this->loadComponent('Flash');
-        $this->Auth->allow(['new', 'add', 'login', 'logout']);
+        $this->Auth->allow(['new', 'add', 'login']);
     }
 
     /**
