@@ -50,6 +50,38 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'loginForm'
+            ],
+            // コントローラーで isAuthorized を使用する
+            'authorize' => ['Controller'],
+            // 未認証の場合、直前のページに戻す
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+
+        // display アクションを許可して、PagesController が引き続き
+        // 動作するようにする。また、読み取り専用のアクションを有効にする。
+        // $this->Auth->allow(['display', 'view', 'index']);
+    }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        if (in_array($action, ['index', 'new', 'add', 'edit', 'update', 'delete'])) {
+            return true;
+        }
+        return false;
     }
 
     /**
