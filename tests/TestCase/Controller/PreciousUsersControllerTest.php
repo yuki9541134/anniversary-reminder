@@ -8,6 +8,27 @@ class PreciousUsersControllerTest extends IntegrationTestCase
     public $fixtures = ['app.PreciousUsers'];
 
     /**
+     * setUp method
+     * @return void
+     * テスト前に毎回実行される
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        // PreciousUsersControllerのアクセスには認証が必要なため、
+        // セッションデータをセットする
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'testing',
+                ]
+            ]
+        ]);
+    }
+
+    /**
      * 正常系
      * @retrun void
      */

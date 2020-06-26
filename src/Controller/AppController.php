@@ -70,8 +70,8 @@ class AppController extends Controller
             'unauthorizedRedirect' => $this->referer()
         ]);
 
-        // ログインしていない場合は、全てのアクションを許可しない
-        // $this->Auth->allow(['display', 'view', 'index']);
+        // ログインしていない場合は、PagesControllerのdisplay以外許可しない
+        $this->Auth->allow(['display']);
     }
 
     public function isAuthorized($user)
