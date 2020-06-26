@@ -30,9 +30,9 @@ class UsersController extends AppController
 
     /**
      * ログイン
-     * @return Response|null
+     * @return Response
      */
-    public function login()
+    public function login(): Response
     {
         $user = $this->Auth->identify();
         if ($user) {
@@ -46,9 +46,9 @@ class UsersController extends AppController
 
     /**
      * ログアウト
-     * @return Response|null
+     * @return Response
      */
-    public function logout()
+    public function logout(): Response
     {
         $this->Flash->success('ログアウトしました。');
         return $this->redirect($this->Auth->logout());
@@ -66,9 +66,9 @@ class UsersController extends AppController
 
     /**
      * ユーザー登録
-     * @return Response|null
+     * @return Response
      */
-    public function add()
+    public function add(): Response
     {
         $user = $this->Users->newEntity($this->request->getData());
         if ($this->UsersService->addUser($user)) {
