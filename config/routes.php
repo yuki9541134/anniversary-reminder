@@ -58,10 +58,12 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     // ユーザーページ
     $routes->connect('/users/login_form', ['controller' => 'Users', 'action' => 'loginForm']);
-    $routes->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
+    $routes->connect('/users/login', ['controller' => 'Users', 'action' => 'login'])
+        ->setMethods(['POST']);
     $routes->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
     $routes->connect('/users/new', ['controller' => 'Users', 'action' => 'new']);
-    $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add']);
+    $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add'])
+        ->setMethods(['POST']);
 
     // 大切な人ページ
     $routes->connect('/precious-users/index', ['controller' => 'PreciousUsers', 'action' => 'index']);

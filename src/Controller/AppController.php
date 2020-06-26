@@ -77,7 +77,7 @@ class AppController extends Controller
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        if (in_array($action, ['index', 'new', 'add', 'edit', 'update', 'delete'])) {
+        if (in_array($action, ['index', 'new', 'add', 'edit', 'update', 'delete', 'logout'])) {
             return true;
         }
         return false;
