@@ -2,9 +2,11 @@
 namespace App\Controller;
 
 use App\Model\Table\UsersTable;
+use App\Service\UsersService;
 use Cake\Http\Response;
 
 /**
+ * @property UsersService $UsersService
  * @property UsersTable $Users
  */
 class UsersController extends AppController
@@ -14,6 +16,8 @@ class UsersController extends AppController
         parent::initialize();
         $this->loadComponent('Flash');
         $this->Auth->allow(['new', 'add', 'login']);
+        // serviceにtableを注入する
+        $this->UsersService = new UsersService($this->Users);
     }
 
     /**
@@ -67,7 +71,7 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEntity($this->request->getData());
-        if ($this->Users->save($user)) {
+        if ($this->UsersService->addUser($user)) {
             $this->Flash->success(__('ユーザー登録に成功しました。'));
             return $this->redirect(['action' => 'loginForm']);
         }

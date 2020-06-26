@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\User;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -57,5 +58,15 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['email']));
         return $rules;
+    }
+
+    /**
+     * ユーザーを登録する
+     * @param User $user
+     * @return User|boolean
+     */
+    public function addUser(User $user)
+    {
+        return $this->save($user);
     }
 }
