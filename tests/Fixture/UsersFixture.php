@@ -1,6 +1,7 @@
 <?php
 namespace App\Test\Fixture;
 
+use App\Model\Entity\User;
 use Cake\TestSuite\Fixture\TestFixture;
 
 class UsersFixture extends TestFixture
@@ -16,12 +17,24 @@ class UsersFixture extends TestFixture
         ]
     ];
 
-    public $records = [
-        [
-            'email' => 'test1@example.com',
-            'password' => 'pass1',
-            'created' => '2007-03-18 10:39:23',
-            'modified' => '2007-03-18 10:41:31'
-        ],
-    ];
+    public $records;
+
+    public function init()
+    {
+        parent::init();
+
+        // パスワードをハッシュ化するため、Userエンティティからレコードを作成する
+        $user = new User([
+           'email' => 'test1@example.com',
+           'password' => 'password',
+        ]);
+        $this->records = [
+            [
+                'email' => $user->email,
+                'password' => $user->password,
+                'created' => '2007-03-18 10:39:23',
+                'modified' => '2007-03-18 10:41:31'
+            ],
+        ];
+    }
 }
