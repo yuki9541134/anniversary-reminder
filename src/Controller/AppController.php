@@ -64,6 +64,7 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'loginForm'
             ],
+            'authError' => 'ログインしてください。',
             // コントローラーで isAuthorized を使用する
             'authorize' => ['Controller'],
             // 未認証の場合、直前のページに戻す

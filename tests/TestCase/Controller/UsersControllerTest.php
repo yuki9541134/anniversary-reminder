@@ -115,4 +115,15 @@ class UsersControllerTest extends IntegrationTestCase
         $this->assertRedirect('/users/new');
         $this->assertSession('ユーザー登録に失敗しました。', 'Flash.flash.0.message');
     }
+
+    /**
+     * 未ログイン時のアクセス制限のテスト
+     * @retrun void
+     */
+    public function testAuth()
+    {
+        $this->get('/users/logout');
+        $this->assertRedirect('/users/login_form?redirect=%2Fusers%2Flogout');
+        $this->assertSession('ログインしてください。', 'Flash.flash.0.message');
+    }
 }
