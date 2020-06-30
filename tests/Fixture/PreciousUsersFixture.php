@@ -20,7 +20,7 @@ class PreciousUsersFixture extends TestFixture
 
     public $records = [
         [
-            'user_id' => '0',
+            'user_id' => '1',
             'name' => 'First Person',
             'gender' => '0',
             'relation' => '0',

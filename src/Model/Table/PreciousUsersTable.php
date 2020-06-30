@@ -16,11 +16,13 @@ class PreciousUsersTable extends Table
 
     /**
      * 大切な人一覧を取得するクエリを取得
+     * @param int $user_id
      * @return Query
      */
-    public function findPreciousUsers(): Query
+    public function findPreciousUsers(int $user_id): Query
     {
-        return $this->find();
+        return $this->find()
+            ->where(['user_id' => $user_id]);
     }
 
     /**

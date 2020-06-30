@@ -35,7 +35,7 @@ class PreciousUsersServiceTest extends TestCase
         $this->PreciousUsersService = new PreciousUsersService(TableRegistry::get('PreciousUsers'));
 
         // test
-        $result = $this->PreciousUsersService->getPreciousUsers();
+        $result = $this->PreciousUsersService->getPreciousUsers(1);
         $this->assertInstanceOf('Cake\ORM\Query', $result);
     }
 

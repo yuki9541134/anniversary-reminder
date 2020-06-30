@@ -22,13 +22,35 @@ class PreciousUsersController extends AppController
         $this->PreciousUsersService = new PreciousUsersService($this->PreciousUsers);
     }
 
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // 一覧、追加はログインしているユーザーに許可する
+        if (in_array($action, ['index', 'new', 'add'] )) {
+            return true;
+        }
+
+        // 更新・削除対象が現在のユーザーに属していることを確認する
+        if (in_array($action, ['update'] )) {
+            $id = $this->request->getData('id');
+        } else {
+            $id = $this->request->getParam('id');
+        }
+        $precious_users = $this->PreciousUsersService->getPreciousUser($id);
+        if ($precious_users)  {
+            return $precious_users->user_id === $user['id'];
+        } else {
+             return false;
+        }
+    }
+
     /**
      * 大切な人一覧画面を表示する
      * @return void
      */
     public function index()
     {
-        $precious_users = $this->Paginator->paginate($this->PreciousUsersService->getPreciousUsers());
+        $precious_users = $this->Paginator->paginate($this->PreciousUsersService->getPreciousUsers($this->Auth->user('id')));
         $this->set(compact('precious_users'));
     }
 
@@ -51,6 +73,7 @@ class PreciousUsersController extends AppController
     public function add()
     {
         $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+        $precious_user->user_id = $this->Auth->user('id');
         if ($this->PreciousUsersService->addPreciousUser($precious_user)) {
             $this->Flash->success(__('大切な人を追加しました。'));
             return $this->redirect(['action' => 'index']);

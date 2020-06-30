@@ -25,11 +25,12 @@ class PreciousUsersService extends AppService
 
     /**
      * 大切な人一覧を取得する
+     * @param int $user_id
      * @return Query
      */
-    public function getPreciousUsers(): Query
+    public function getPreciousUsers(int $user_id): Query
     {
-        return $this->PreciousUsers->findPreciousUsers();
+        return $this->PreciousUsers->findPreciousUsers($user_id);
     }
 
     /**
