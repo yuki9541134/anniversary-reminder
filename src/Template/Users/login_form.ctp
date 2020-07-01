@@ -1,0 +1,8 @@
+<h1>ログイン</h1>
+<?= $this->Form->create(null, ['url' => '/users/login']) ?>
+<?= $this->Form->control('email') ?>
+<?= $this->Form->control('password') ?>
+<?= $this->Form->button('ログイン') ?>
+<?= $this->Form->end() ?>
+
+<?= $this->Html->link('ユーザー登録はこちら', ['action' => 'new']) ?>

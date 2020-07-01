@@ -1,3 +1,4 @@
+<?php echo $this->element('header'); ?>
 <h1>大切な人を編集する</h1>
 <?php
 echo $this->Form->create($precious_user, ['url' => '/precious-users/update', 'type' => 'put']);

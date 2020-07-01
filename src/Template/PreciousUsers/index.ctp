@@ -1,3 +1,4 @@
+<?php echo $this->element('header'); ?>
 <h1>大切な人一覧</h1>
 <table>
     <tr>
