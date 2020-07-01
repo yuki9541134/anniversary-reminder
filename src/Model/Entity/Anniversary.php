@@ -22,7 +22,12 @@ class Anniversary extends Entity
         'id' => false,
     ];
 
-    public function getAnniversaryType() {
+    /**
+     * 記念日の種類を文字列に変換する
+     * @return string
+     */
+    public function getAnniversaryType(): string
+    {
         return new AnniversaryType($this->anniversary_type);
     }
 }

@@ -30,6 +30,7 @@ class UsersFixture extends TestFixture
         ]);
         $this->records = [
             [
+                'id' => 1,
                 'email' => $user->email,
                 'password' => $user->password,
                 'created' => '2007-03-18 10:39:23',

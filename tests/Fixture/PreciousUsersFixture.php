@@ -20,6 +20,7 @@ class PreciousUsersFixture extends TestFixture
 
     public $records = [
         [
+            'id' => '1',
             'user_id' => '1',
             'name' => 'First Person',
             'gender' => '0',
@@ -28,6 +29,7 @@ class PreciousUsersFixture extends TestFixture
             'modified' => '2007-03-18 10:41:31'
         ],
         [
+            'id' => '2',
             'user_id' => '1',
             'name' => 'Second Person',
             'gender' => '1',
@@ -36,6 +38,7 @@ class PreciousUsersFixture extends TestFixture
             'modified' => '2007-03-18 10:43:31'
         ],
         [
+            'id' => '3',
             'user_id' => '2',
             'name' => 'Third Person',
             'gender' => '2',
