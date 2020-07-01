@@ -160,4 +160,36 @@ class PreciousUsersControllerTest extends IntegrationTestCase
         $this->assertRedirect('/precious-users/index');
         $this->assertSession('大切な人の削除に失敗しました。', 'Flash.flash.0.message');
     }
+
+    /**
+     * 未ログイン時のアクセス制限のテスト
+     * @retrun void
+     */
+    public function testAuth()
+    {
+        $this->session(['Auth' => []]);
+
+        $routes = [
+            ['url' => 'index', 'method' => 'get'],
+            ['url' => 'new', 'method' => 'get'],
+            ['url' => 'add', 'method' => 'post'],
+            ['url' => 'edit/1', 'method' => 'get'],
+            ['url' => 'update', 'method' => 'post'],
+            ['url' => 'delete/1', 'method' => 'post'],
+        ];
+        foreach ($routes as $route) {
+            $url = '/precious-users/' . $route['url'];
+
+            if ($route['method'] == 'get') {
+                $this->get($url);
+                $this->assertRedirect('/users/login_form?redirect=' . urlencode($url));
+            }
+            if ($route['method'] == 'post') {
+                $this->post($url);
+                $this->assertRedirect('/users/login_form');
+            }
+
+            $this->assertSession('ログインしてください。', 'Flash.flash.0.message');
+        }
+    }
 }
