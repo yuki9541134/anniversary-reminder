@@ -35,12 +35,13 @@ class PreciousUsersService extends AppService
 
     /**
      * 大切な人を取得する
-     * @param int $id
+     * @param int $target_precious_user_id
+     * @param int $target_user_id
      * @return PreciousUser|null
      */
-    public function getPreciousUser(int $id): ?PreciousUser
+    public function getPreciousUser(int $target_precious_user_id, int $target_user_id): ?PreciousUser
     {
-        return $this->PreciousUsers->getPreciousUser($id);
+        return $this->PreciousUsers->getPreciousUser($target_precious_user_id, $target_user_id);
     }
 
     /**
@@ -56,12 +57,13 @@ class PreciousUsersService extends AppService
     /**
      * 大切な人を更新する
      * @param int $target_precious_user_id
+     * @param int $target_user_id
      * @param PreciousUser $precious_user
      * @return boolean
      */
-    public function updatePreciousUser(int $target_precious_user_id, PreciousUser $precious_user): bool
+    public function updatePreciousUser(int $target_precious_user_id, int $target_user_id, PreciousUser $precious_user): bool
     {
-        if ($this->getPreciousUser($target_precious_user_id) != null){
+        if ($this->getPreciousUser($target_precious_user_id, $target_user_id) != null){
             $this->PreciousUsers->updatePreciousUser($target_precious_user_id, $precious_user);
             return true;
         }
@@ -71,11 +73,12 @@ class PreciousUsersService extends AppService
     /**
      * 大切な人を削除する
      * @param int $target_precious_user_id
+     * @param int $target_user_id
      * @return boolean
      */
-    public function deletePreciousUser(int $target_precious_user_id): bool
+    public function deletePreciousUser(int $target_precious_user_id, int $target_user_id): bool
     {
-        $target_precious_user = $this->getPreciousUser($target_precious_user_id);
+        $target_precious_user = $this->getPreciousUser($target_precious_user_id, $target_user_id);
         if ($target_precious_user != null){
             $this->PreciousUsers->deletePreciousUser($target_precious_user);
             return true;

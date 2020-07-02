@@ -22,28 +22,6 @@ class PreciousUsersController extends AppController
         $this->PreciousUsersService = new PreciousUsersService($this->PreciousUsers);
     }
 
-    public function isAuthorized($user)
-    {
-        $action = $this->request->getParam('action');
-        // 一覧、追加はログインしているユーザーに許可する
-        if (in_array($action, ['index', 'new', 'add'] )) {
-            return true;
-        }
-
-        // 更新・削除対象が現在のユーザーに属していることを確認する
-        if (in_array($action, ['update'] )) {
-            $id = $this->request->getData('id');
-        } else {
-            $id = $this->request->getParam('id');
-        }
-        $precious_users = $this->PreciousUsersService->getPreciousUser($id);
-        if ($precious_users)  {
-            return $precious_users->user_id === $user['id'];
-        } else {
-             return false;
-        }
-    }
-
     /**
      * 大切な人一覧画面を表示する
      * @return void
@@ -89,8 +67,10 @@ class PreciousUsersController extends AppController
      */
     public function edit(int $id)
     {
-        $precious_user = $this->PreciousUsersService->getPreciousUser($id);
+        $user_id = $this->Auth->user('id');
+        $precious_user = $this->PreciousUsersService->getPreciousUser($id, $user_id);
         if ($precious_user == null) {
+            $this->Flash->error(__('対象が存在しないか、権限がありません。'));
             return $this->redirect(['action' => 'index']);
         }
         $this->set('id', $id);
@@ -105,12 +85,15 @@ class PreciousUsersController extends AppController
      */
     public function update()
     {
-        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
         $target_precious_user_id = $this->request->getData('id');
-        if ($this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user)) {
+        $user_id = $this->Auth->user('id');
+        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+
+        if ($this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $user_id, $precious_user)) {
             $this->Flash->success(__('大切な人を更新しました。'));
             return $this->redirect(['action' => 'index']);
         }
+
         $this->Flash->error(__('大切な人の更新に失敗しました。'));
         return $this->redirect(['action' => 'edit', $target_precious_user_id]);
     }
@@ -122,10 +105,12 @@ class PreciousUsersController extends AppController
      */
     public function delete(int $id)
     {
-        if ($this->PreciousUsersService->deletePreciousUser($id)) {
+        $user_id = $this->Auth->user('id');
+
+        if ($this->PreciousUsersService->deletePreciousUser($id, $user_id)) {
             $this->Flash->success(__('大切な人を削除しました。'));
         } else {
-            $this->Flash->error(__('大切な人の削除に失敗しました。'));
+            $this->Flash->error(__('対象が存在しないか、権限がありません。'));
         }
         return $this->redirect(['action' => 'index']);
     }

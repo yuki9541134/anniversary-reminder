@@ -27,13 +27,19 @@ class PreciousUsersTable extends Table
 
     /**
      * 大切な人を取得する
-     * @param int $id
+     * @param int $target_precious_user_id
+     * @param int $target_user_id
      * @return PreciousUser|null
      */
-    public function getPreciousUser(int $id) : ?PreciousUser
+    public function getPreciousUser(int $target_precious_user_id, int $target_user_id) : ?PreciousUser
     {
         try {
-            return $this->get($id);
+            return $this->find()
+                ->where([
+                        'id' => $target_precious_user_id,
+                        'user_id' => $target_user_id,
+                    ])
+                ->first();
         } catch (RecordNotFoundException $e) {
             return null;
         }
