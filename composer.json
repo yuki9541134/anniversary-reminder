@@ -11,7 +11,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "~1.0",
         "josegonzalez/dotenv": "2.*",
-        "tutida/altair": "^1.0"
+        "tutida/altair": "^1.0",
+        "ext-PDO": "^7.2"
     },
     "require-dev": {
         "psy/psysh": "@stable",

@@ -14,7 +14,7 @@
             <?= $anniversary->precious_user->name ?>
         </td>
         <td>
-            <?= $anniversary->getAnniversaryType() ?>
+            <?= $anniversary->anniversary_type ?>
         </td>
         <td>
             <?= $anniversary->anniversary_date->i18nFormat('yyyy年MM月dd日'); ?>

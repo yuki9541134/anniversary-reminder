@@ -2,7 +2,6 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use App\Enum\AnniversaryType;
 
 /**
  * 記念日エンティティ
@@ -21,13 +20,4 @@ class Anniversary extends Entity
         '*' => true,
         'id' => false,
     ];
-
-    /**
-     * 記念日の種類を文字列に変換する
-     * @return string
-     */
-    public function getAnniversaryType(): string
-    {
-        return new AnniversaryType($this->anniversary_type);
-    }
 }

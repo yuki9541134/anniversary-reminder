@@ -2,8 +2,6 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use App\Enum\Gender;
-use App\Enum\Relation;
 
 /**
  * 大切な人エンティティ
@@ -22,12 +20,4 @@ class PreciousUser extends Entity
         '*' => true,
         'id' => false,
     ];
-
-    public function getGender() {
-        return new Gender($this->gender);
-    }
-
-    public function getRelation() {
-        return new Relation($this->relation);
-    }
 }

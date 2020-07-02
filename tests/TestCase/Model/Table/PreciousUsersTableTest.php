@@ -36,8 +36,8 @@ class PreciousUsersTableTest extends TestCase
         $this->assertInstanceOf('Cake\ORM\Query', $query);
         $result = $query->enableHydration(false)->toArray();
         $expected = [
-            ['id' => 1, 'user_id' => 1, 'name' => 'First Person', 'gender' => 0, 'relation' => 0, 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')],
-            ['id' => 2, 'user_id' => 1, 'name' => 'Second Person', 'gender' => 1, 'relation' => 1, 'created' => new FrozenTime('2007-03-18 10:41:23'), 'modified' => new FrozenTime('2007-03-18 10:43:31')],
+            ['id' => 1, 'user_id' => 1, 'name' => 'First Person', 'gender' => '男性', 'relation' => '父親', 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')],
+            ['id' => 2, 'user_id' => 1, 'name' => 'Second Person', 'gender' => '女性', 'relation' => '母親', 'created' => new FrozenTime('2007-03-18 10:41:23'), 'modified' => new FrozenTime('2007-03-18 10:43:31')],
         ];
 
         $this->assertEquals($expected, $result);
@@ -51,7 +51,7 @@ class PreciousUsersTableTest extends TestCase
     {
         $result = $this->PreciousUsers->getPreciousUser(1);
         $this->assertInstanceOf('App\Model\Entity\PreciousUser', $result);
-        $expected = ['id' => 1, 'user_id' => 1, 'name' => 'First Person', 'gender' => 0, 'relation' => 0, 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')];
+        $expected = ['id' => 1, 'user_id' => 1, 'name' => 'First Person', 'gender' => '男性', 'relation' => '父親', 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')];
         $this->assertEquals($expected, $result->toArray());
     }
 

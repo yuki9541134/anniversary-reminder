@@ -1,8 +1,8 @@
 <?php
+namespace App\Database\Type;
 
-namespace App\Enum;
-
-class Relation extends AppEnum {
+class RelationEnumType extends EnumType
+{
     const ENUM = [
         0 => "父親",
         1 => "母親",

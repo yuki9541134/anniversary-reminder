@@ -4,8 +4,8 @@ namespace App\Controller;
 use App\Service\PreciousUsersService;
 use App\Model\Table\PreciousUsersTable;
 use Cake\Http\Response;
-use App\Enum\Gender;
-use App\Enum\Relation;
+use App\Database\Type\GenderEnumType;
+use App\Database\Type\RelationEnumType;
 
 /**
  * @property PreciousUsersService $PreciousUsersService
@@ -62,8 +62,8 @@ class PreciousUsersController extends AppController
     {
         $precious_user = $this->PreciousUsers->newEntity();
         $this->set('precious_user', $precious_user);
-        $this->set('gender_selector', Gender::ENUM);
-        $this->set('relation_selector', Relation::ENUM);
+        $this->set('gender_selector', array_values(GenderEnumType::ENUM));
+        $this->set('relation_selector', array_values(RelationEnumType::ENUM));
     }
 
     /**
@@ -95,8 +95,8 @@ class PreciousUsersController extends AppController
         }
         $this->set('id', $id);
         $this->set('precious_user', $precious_user);
-        $this->set('gender_selector', Gender::ENUM);
-        $this->set('relation_selector', Relation::ENUM);
+        $this->set('gender_selector', array_values(GenderEnumType::ENUM));
+        $this->set('relation_selector', array_values(RelationEnumType::ENUM));
     }
 
     /**

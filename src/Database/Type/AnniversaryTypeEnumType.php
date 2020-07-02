@@ -1,8 +1,8 @@
 <?php
+namespace App\Database\Type;
 
-namespace App\Enum;
-
-class AnniversaryType extends AppEnum {
+class AnniversaryTypeEnumType extends EnumType
+{
     const ENUM = [
         0 => "誕生日",
         1 => "記念日",

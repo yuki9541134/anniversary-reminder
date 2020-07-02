@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\Anniversary;
+use Cake\Database\Schema\TableSchema;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -13,6 +14,12 @@ class AnniversariesTable extends Table
         $this->addBehavior('Timestamp');
         $this->belongsTo('Users');
         $this->belongsTo('PreciousUsers');
+    }
+
+    protected function _initializeSchema(TableSchema $schema)
+    {
+        $schema->setColumnType('anniversary_type', 'AnniversaryType');
+        return $schema;
     }
 
     /**
