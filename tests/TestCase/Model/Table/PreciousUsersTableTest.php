@@ -49,7 +49,7 @@ class PreciousUsersTableTest extends TestCase
      */
     public function testGetPreciousUserSuccess()
     {
-        $result = $this->PreciousUsers->getPreciousUser(1);
+        $result = $this->PreciousUsers->getPreciousUser(1, 1);
         $this->assertInstanceOf('App\Model\Entity\PreciousUser', $result);
         $expected = ['id' => 1, 'user_id' => 1, 'name' => 'First Person', 'gender' => 0, 'relation' => 0, 'created' => new FrozenTime('2007-03-18 10:39:23'), 'modified' => new FrozenTime('2007-03-18 10:41:31')];
         $this->assertEquals($expected, $result->toArray());
@@ -61,7 +61,7 @@ class PreciousUsersTableTest extends TestCase
      */
     public function testGetPreciousUserFailed()
     {
-        $result = $this->PreciousUsers->getPreciousUser(100);
+        $result = $this->PreciousUsers->getPreciousUser(100, 1);
         $this->assertEquals(null, $result);
     }
 

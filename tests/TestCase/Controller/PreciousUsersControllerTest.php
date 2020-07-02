@@ -100,7 +100,8 @@ class PreciousUsersControllerTest extends IntegrationTestCase
     public function testEditNotFound()
     {
         $this->get('/precious-users/edit/100');
-        $this->assertRedirect('/');
+        $this->assertRedirect('/precious-users/index');
+        $this->assertSession('対象が存在しないか、権限がありません。', 'Flash.flash.0.message');
     }
 
     /**
@@ -135,8 +136,8 @@ class PreciousUsersControllerTest extends IntegrationTestCase
             'relation' => 0,
         ];
         $this->put('/precious-users/update', $body);
-        $this->assertRedirect('/');
-        $this->assertSession('権限がありません。', 'Flash.flash.0.message');
+        $this->assertRedirect('/precious-users/index');
+        $this->assertSession('対象が存在しないか、権限がありません。', 'Flash.flash.0.message');
     }
 
     /**
@@ -157,8 +158,8 @@ class PreciousUsersControllerTest extends IntegrationTestCase
     public function testDeleteNotFound()
     {
         $this->delete('/precious-users/delete/100');
-        $this->assertRedirect('/');
-        $this->assertSession('権限がありません。', 'Flash.flash.0.message');
+        $this->assertRedirect('/precious-users/index');
+        $this->assertSession('対象が存在しないか、権限がありません。', 'Flash.flash.0.message');
     }
 
     /**

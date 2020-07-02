@@ -94,8 +94,8 @@ class PreciousUsersController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
-        $this->Flash->error(__('大切な人の更新に失敗しました。'));
-        return $this->redirect(['action' => 'edit', $target_precious_user_id]);
+        $this->Flash->error(__('対象が存在しないか、権限がありません。'));
+        return $this->redirect(['action' => 'index']);
     }
 
     /**
