@@ -94,13 +94,14 @@ class PreciousUsersControllerTest extends IntegrationTestCase
     }
 
     /**
-     * 異常系
+     * 異常系 対象がない or 権限がないとき
      * @retrun void
      */
     public function testEditNotFound()
     {
         $this->get('/precious-users/edit/100');
         $this->assertRedirect('/precious-users/index');
+        $this->assertSession('対象が存在しないか、権限がありません。', 'Flash.flash.0.message');
     }
 
     /**
@@ -122,10 +123,10 @@ class PreciousUsersControllerTest extends IntegrationTestCase
     }
 
     /**
-     * 異常系
+     * 異常系 対象がない or 権限がないとき
      * @retrun void
      */
-    public function testUpdateFailed()
+    public function testUpdateNotFound()
     {
         $body = [
             'id' => 100,
@@ -135,8 +136,8 @@ class PreciousUsersControllerTest extends IntegrationTestCase
             'relation' => 0,
         ];
         $this->put('/precious-users/update', $body);
-        $this->assertRedirect('/precious-users/edit/100');
-        $this->assertSession('大切な人の更新に失敗しました。', 'Flash.flash.0.message');
+        $this->assertRedirect('/precious-users/index');
+        $this->assertSession('対象が存在しないか、権限がありません。', 'Flash.flash.0.message');
     }
 
     /**
@@ -151,14 +152,14 @@ class PreciousUsersControllerTest extends IntegrationTestCase
     }
 
     /**
-     * 異常系 削除対象がないとき
+     * 異常系 削除対象がない or 権限がないとき
      * @retrun void
      */
-    public function testDeleteFailed()
+    public function testDeleteNotFound()
     {
         $this->delete('/precious-users/delete/100');
         $this->assertRedirect('/precious-users/index');
-        $this->assertSession('大切な人の削除に失敗しました。', 'Flash.flash.0.message');
+        $this->assertSession('対象が存在しないか、権限がありません。', 'Flash.flash.0.message');
     }
 
     /**
@@ -189,7 +190,7 @@ class PreciousUsersControllerTest extends IntegrationTestCase
                 $this->assertRedirect('/users/login_form');
             }
 
-            $this->assertSession('ログインしてください。', 'Flash.flash.0.message');
+            $this->assertSession('権限がありません。', 'Flash.flash.0.message');
         }
     }
 }

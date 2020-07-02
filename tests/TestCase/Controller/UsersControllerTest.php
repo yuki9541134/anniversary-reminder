@@ -124,6 +124,6 @@ class UsersControllerTest extends IntegrationTestCase
     {
         $this->get('/users/logout');
         $this->assertRedirect('/users/login_form?redirect=%2Fusers%2Flogout');
-        $this->assertSession('ログインしてください。', 'Flash.flash.0.message');
+        $this->assertSession('権限がありません。', 'Flash.flash.0.message');
     }
 }

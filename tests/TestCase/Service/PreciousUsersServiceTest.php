@@ -35,7 +35,7 @@ class PreciousUsersServiceTest extends TestCase
         $this->PreciousUsersService = new PreciousUsersService(TableRegistry::get('PreciousUsers'));
 
         // test
-        $result = $this->PreciousUsersService->getPreciousUsers();
+        $result = $this->PreciousUsersService->getPreciousUsers(1);
         $this->assertInstanceOf('Cake\ORM\Query', $result);
     }
 
@@ -46,18 +46,19 @@ class PreciousUsersServiceTest extends TestCase
     public function testGetPreciousUser()
     {
         // setup
-        $id = 1;
+        $precious_user_id = 1;
+        $user_id = 1;
         $precious_user = new PreciousUser();
 
         $PreciousUsers = Mockery::mock('PreciousUsers');
         $PreciousUsers->shouldReceive('getPreciousUser')
-            ->with($id)
+            ->with($precious_user_id, $user_id)
             ->once()
             ->andReturn($precious_user);
         $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
 
         // test
-        $result = $this->PreciousUsersService->getPreciousUser($id);
+        $result = $this->PreciousUsersService->getPreciousUser($precious_user_id, $user_id);
         $this->assertEquals($precious_user, $result);
     }
 
@@ -96,11 +97,12 @@ class PreciousUsersServiceTest extends TestCase
     {
         // setup
         $target_precious_user_id = 1;
+        $target_user_id = 1;
         $precious_user = new PreciousUser();
 
         $PreciousUsers = Mockery::mock('PreciousUsers');
         $PreciousUsers->shouldReceive('getPreciousUser')
-            ->with($target_precious_user_id)
+            ->with($target_precious_user_id, $target_user_id)
             ->once()
             ->andReturn($precious_user);
         $PreciousUsers->shouldReceive('updatePreciousUser')
@@ -111,7 +113,7 @@ class PreciousUsersServiceTest extends TestCase
         $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
 
         // test
-        $result = $this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user);
+        $result = $this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $target_user_id, $precious_user);
         $this->assertEquals(true, $result);
     }
 
@@ -123,17 +125,18 @@ class PreciousUsersServiceTest extends TestCase
     {
         // setup
         $target_precious_user_id = 1;
+        $target_user_id = 1;
         $precious_user = new PreciousUser();
 
         $PreciousUsers = Mockery::mock('PreciousUsers');
         $PreciousUsers->shouldReceive('getPreciousUser')
-            ->with($target_precious_user_id)
+            ->with($target_precious_user_id, $target_user_id)
             ->once()
             ->andReturn(null);
         $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
 
         // test
-        $result = $this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user);
+        $result = $this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $target_user_id, $precious_user);
         $this->assertEquals(false, $result);
     }
 
@@ -145,11 +148,12 @@ class PreciousUsersServiceTest extends TestCase
     {
         // setup
         $target_precious_user_id = 1;
+        $target_user_id =  1;
         $precious_user = new PreciousUser();
 
         $PreciousUsers = Mockery::mock('PreciousUsers');
         $PreciousUsers->shouldReceive('getPreciousUser')
-            ->with($target_precious_user_id)
+            ->with($target_precious_user_id, $target_user_id)
             ->once()
             ->andReturn($precious_user);
         $PreciousUsers->shouldReceive('deletePreciousUser')
@@ -158,7 +162,7 @@ class PreciousUsersServiceTest extends TestCase
         $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
 
         // test
-        $result = $this->PreciousUsersService->deletePreciousUser($target_precious_user_id);
+        $result = $this->PreciousUsersService->deletePreciousUser($target_precious_user_id, $target_user_id);
         $this->assertEquals(true, $result);
     }
 
@@ -170,16 +174,17 @@ class PreciousUsersServiceTest extends TestCase
     {
         // setup
         $target_precious_user_id = 1;
+        $target_user_id = 1;
 
         $PreciousUsers = Mockery::mock('PreciousUsers');
         $PreciousUsers->shouldReceive('getPreciousUser')
-            ->with($target_precious_user_id)
+            ->with($target_precious_user_id, $target_user_id)
             ->once()
             ->andReturn(null);
         $this->PreciousUsersService = new PreciousUsersService($PreciousUsers);
 
         // test
-        $result = $this->PreciousUsersService->deletePreciousUser($target_precious_user_id);
+        $result = $this->PreciousUsersService->deletePreciousUser($target_precious_user_id, $target_user_id);
         $this->assertEquals(false, $result);
     }
 }

@@ -28,7 +28,7 @@ class PreciousUsersController extends AppController
      */
     public function index()
     {
-        $precious_users = $this->Paginator->paginate($this->PreciousUsersService->getPreciousUsers());
+        $precious_users = $this->Paginator->paginate($this->PreciousUsersService->getPreciousUsers($this->Auth->user('id')));
         $this->set(compact('precious_users'));
     }
 
@@ -51,6 +51,7 @@ class PreciousUsersController extends AppController
     public function add()
     {
         $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+        $precious_user->user_id = $this->Auth->user('id');
         if ($this->PreciousUsersService->addPreciousUser($precious_user)) {
             $this->Flash->success(__('大切な人を追加しました。'));
             return $this->redirect(['action' => 'index']);
@@ -66,8 +67,10 @@ class PreciousUsersController extends AppController
      */
     public function edit(int $id)
     {
-        $precious_user = $this->PreciousUsersService->getPreciousUser($id);
+        $user_id = $this->Auth->user('id');
+        $precious_user = $this->PreciousUsersService->getPreciousUser($id, $user_id);
         if ($precious_user == null) {
+            $this->Flash->error(__('対象が存在しないか、権限がありません。'));
             return $this->redirect(['action' => 'index']);
         }
         $this->set('id', $id);
@@ -82,14 +85,17 @@ class PreciousUsersController extends AppController
      */
     public function update()
     {
-        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
         $target_precious_user_id = $this->request->getData('id');
-        if ($this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $precious_user)) {
+        $user_id = $this->Auth->user('id');
+        $precious_user = $this->PreciousUsers->newEntity($this->request->getData());
+
+        if ($this->PreciousUsersService->updatePreciousUser($target_precious_user_id, $user_id, $precious_user)) {
             $this->Flash->success(__('大切な人を更新しました。'));
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('大切な人の更新に失敗しました。'));
-        return $this->redirect(['action' => 'edit', $target_precious_user_id]);
+
+        $this->Flash->error(__('対象が存在しないか、権限がありません。'));
+        return $this->redirect(['action' => 'index']);
     }
 
     /**
@@ -99,10 +105,12 @@ class PreciousUsersController extends AppController
      */
     public function delete(int $id)
     {
-        if ($this->PreciousUsersService->deletePreciousUser($id)) {
+        $user_id = $this->Auth->user('id');
+
+        if ($this->PreciousUsersService->deletePreciousUser($id, $user_id)) {
             $this->Flash->success(__('大切な人を削除しました。'));
         } else {
-            $this->Flash->error(__('大切な人の削除に失敗しました。'));
+            $this->Flash->error(__('対象が存在しないか、権限がありません。'));
         }
         return $this->redirect(['action' => 'index']);
     }
