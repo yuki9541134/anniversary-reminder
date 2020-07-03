@@ -16,7 +16,7 @@ class UsersService extends AppService
      * serviceとtableが密結合だとモックが作れないので、疎結合にする。
      * @param UsersTable $Users
      */
-    public function __construct(UsersTable $Users)
+    public function __construct($Users)
     {
         parent::__construct();
         $this->Users = $Users;

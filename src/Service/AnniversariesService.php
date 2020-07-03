@@ -16,7 +16,7 @@ class AnniversariesService extends AppService
      * serviceとtableが密結合だとモックが作れないので、疎結合にする。
      * @param AnniversariesTable $Anniversaries
      */
-    public function __construct(AnniversariesTable $Anniversaries)
+    public function __construct($Anniversaries)
     {
         parent::__construct();
         $this->Anniversaries = $Anniversaries;
