@@ -62,8 +62,8 @@ class PreciousUsersController extends AppController
     {
         $precious_user = $this->PreciousUsers->newEntity();
         $this->set('precious_user', $precious_user);
-        $this->set('gender_selector', array_values(GenderEnumType::ENUM));
-        $this->set('relation_selector', array_values(RelationEnumType::ENUM));
+        $this->set('gender_selector', GenderEnumType::ENUM);
+        $this->set('relation_selector', RelationEnumType::ENUM);
     }
 
     /**
