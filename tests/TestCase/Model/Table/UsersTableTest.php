@@ -59,6 +59,9 @@ class UsersTableTest extends TestCase
      */
     public function testValidationDefaultFailedWithInvalidType()
     {
+        // passwordの型が正しくないというWarningが表示されるが、今回は意図通りのため
+        error_reporting(0);
+
         $user = $this->Users->newEntity([
             'id' => 'aaa',
             'email' => 'aaa',
@@ -68,6 +71,8 @@ class UsersTableTest extends TestCase
         $this->assertNotEmpty($errors['id']['integer']);
         $this->assertNotEmpty($errors['email']['email']);
         $this->assertNotEmpty($errors['password']['scalar']);
+
+        error_reporting(-1);
     }
 
     /**
