@@ -1,8 +1,8 @@
 <?php
+namespace App\Database\Type;
 
-namespace App\Enum;
-
-class Gender extends AppEnum {
+class GenderEnumType extends EnumType
+{
     const ENUM = [
         0 => "男性",
         1 => "女性",

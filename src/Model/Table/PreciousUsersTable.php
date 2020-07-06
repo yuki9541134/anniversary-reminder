@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\PreciousUser;
+use Cake\Database\Schema\TableSchema;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
@@ -12,6 +13,13 @@ class PreciousUsersTable extends Table
     public function initialize(array $config)
     {
         $this->addBehavior('Timestamp');
+    }
+
+    protected function _initializeSchema(TableSchema $schema)
+    {
+        $schema->setColumnType('gender', 'Gender');
+        $schema->setColumnType('relation', 'Relation');
+        return $schema;
     }
 
     /**

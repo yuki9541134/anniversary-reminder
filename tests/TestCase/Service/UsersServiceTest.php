@@ -35,7 +35,7 @@ class UsersServiceTest extends TestCase
             'password' => 'password',
         ]);
 
-        $Users = Mockery::mock('Users');
+        $Users = Mockery::mock('App\Model\Table\UsersTable');
         $Users->shouldReceive('addUser')
             ->with($user)
             ->once()

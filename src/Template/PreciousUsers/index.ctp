@@ -14,10 +14,10 @@
             <?= $precious_user->name ?>
         </td>
         <td>
-            <?= $precious_user->getGender() ?>
+            <?= $precious_user->gender ?>
         </td>
         <td>
-            <?= $precious_user->getRelation() ?>
+            <?= $precious_user->relation ?>
         </td>
         <td>
             <?= $this->Html->link('編集', ['action' => 'edit', 'id' => $precious_user->id]) ?>

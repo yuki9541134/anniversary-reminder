@@ -77,6 +77,9 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/precious-users/delete/:id', ['controller' => 'PreciousUsers', 'action' => 'delete'])
         ->setPass(['id'])
         ->setMethods(['POST','DELETE']);
+
+    // 記念日ページ
+    $routes->connect('/anniversaries/index', ['controller' => 'Anniversaries', 'action' => 'index']);
 });
 
 /**

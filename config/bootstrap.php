@@ -188,6 +188,10 @@ Type::build('datetime')
 Type::build('timestamp')
     ->useImmutable();
 
+Type::map('Gender', 'App\Database\Type\GenderEnumType');
+Type::map('Relation', 'App\Database\Type\RelationEnumType');
+Type::map('AnniversaryType', 'App\Database\Type\AnniversaryTypeEnumType');
+
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
  * table, model, controller names or whatever other string is passed to the

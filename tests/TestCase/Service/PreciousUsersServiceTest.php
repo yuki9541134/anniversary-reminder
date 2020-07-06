@@ -50,7 +50,7 @@ class PreciousUsersServiceTest extends TestCase
         $user_id = 1;
         $precious_user = new PreciousUser();
 
-        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers = Mockery::mock('App\Model\Table\PreciousUsersTable');
         $PreciousUsers->shouldReceive('getPreciousUser')
             ->with($precious_user_id, $user_id)
             ->once()
@@ -76,7 +76,7 @@ class PreciousUsersServiceTest extends TestCase
             'relation' => 0,
         ]);
 
-        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers = Mockery::mock('App\Model\Table\PreciousUsersTable');
         $PreciousUsers->shouldReceive('addPreciousUser')
             ->with($precious_user)
             ->once()
@@ -100,7 +100,7 @@ class PreciousUsersServiceTest extends TestCase
         $target_user_id = 1;
         $precious_user = new PreciousUser();
 
-        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers = Mockery::mock('App\Model\Table\PreciousUsersTable');
         $PreciousUsers->shouldReceive('getPreciousUser')
             ->with($target_precious_user_id, $target_user_id)
             ->once()
@@ -128,7 +128,7 @@ class PreciousUsersServiceTest extends TestCase
         $target_user_id = 1;
         $precious_user = new PreciousUser();
 
-        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers = Mockery::mock('App\Model\Table\PreciousUsersTable');
         $PreciousUsers->shouldReceive('getPreciousUser')
             ->with($target_precious_user_id, $target_user_id)
             ->once()
@@ -151,7 +151,7 @@ class PreciousUsersServiceTest extends TestCase
         $target_user_id =  1;
         $precious_user = new PreciousUser();
 
-        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers = Mockery::mock('App\Model\Table\PreciousUsersTable');
         $PreciousUsers->shouldReceive('getPreciousUser')
             ->with($target_precious_user_id, $target_user_id)
             ->once()
@@ -176,7 +176,7 @@ class PreciousUsersServiceTest extends TestCase
         $target_precious_user_id = 1;
         $target_user_id = 1;
 
-        $PreciousUsers = Mockery::mock('PreciousUsers');
+        $PreciousUsers = Mockery::mock('App\Model\Table\PreciousUsersTable');
         $PreciousUsers->shouldReceive('getPreciousUser')
             ->with($target_precious_user_id, $target_user_id)
             ->once()
