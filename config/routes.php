@@ -80,6 +80,9 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     // 記念日ページ
     $routes->connect('/anniversaries/index', ['controller' => 'Anniversaries', 'action' => 'index']);
+    $routes->connect('/anniversaries/new', ['controller' => 'Anniversaries', 'action' => 'new']);
+    $routes->connect('/anniversaries/add', ['controller' => 'Anniversaries', 'action' => 'add'])
+        ->setMethods(['POST']);
 });
 
 /**
