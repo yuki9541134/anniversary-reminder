@@ -70,4 +70,107 @@ class AnniversariesTableTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testAddAnniversarySuccess()
+    {
+        $anniversary = $this->Anniversaries->newEntity([
+            'user_id' => 1,
+            'precious_user_id' => 1,
+            'anniversary_type' => 1,
+            'anniversary_date' => '2020-06-30 00:00:00',
+        ]);
+        $result = $this->Anniversaries->addAnniversary($anniversary);
+        $this->assertEquals($anniversary, $result);
+    }
+
+    /**
+     * 異常系 user_idが空の時
+     * @return void
+     */
+    public function testAddAnniversaryFailed()
+    {
+        $anniversary = $this->Anniversaries->newEntity([
+            'user_id' => null,
+            'precious_user_id' => 1,
+            'anniversary_type' => 1,
+            'anniversary_date' => '2020-06-30 00:00:00',
+        ]);
+        $result = $this->Anniversaries->addAnniversary($anniversary);
+        $this->assertEquals(false, $result);
+    }
+
+    /**
+     * Validation 正常系
+     * @return void
+     */
+    public function testValidationDefaultSuccess()
+    {
+        $anniversary = $this->Anniversaries->newEntity([
+            'user_id' => 1,
+            'precious_user_id' => 1,
+            'anniversary_type' => 1,
+            'anniversary_date' => '2020-06-30 00:00:00',
+        ]);
+        $this->assertEmpty($anniversary->getErrors());
+    }
+
+    /**
+     * Validation 空の時
+     * @return void
+     */
+    public function testValidationDefaultFailedWithNullValue()
+    {
+        $anniversary = $this->Anniversaries->newEntity([
+            'user_id' => null,
+            'precious_user_id' => null,
+            'anniversary_type' => null,
+            'anniversary_date' => null,
+        ]);
+        $errors = $anniversary->getErrors();
+        $this->assertNotEmpty($errors['user_id']['_empty']);
+        $this->assertNotEmpty($errors['precious_user_id']['_empty']);
+        $this->assertNotEmpty($errors['anniversary_type']['_empty']);
+        $this->assertNotEmpty($errors['anniversary_date']['_empty']);
+    }
+
+    /**
+     * Validation 型が合わない時
+     * @return void
+     */
+    public function testValidationDefaultFailedWithInvalidType()
+    {
+        $anniversary = $this->Anniversaries->newEntity([
+            'user_id' => 'aaa',
+            'precious_user_id' => 'aaa',
+            'anniversary_type' => 'aaa',
+            'anniversary_date' => 'aaa',
+        ]);
+        $errors = $anniversary->getErrors();
+        $this->assertNotEmpty($errors['user_id']['integer']);
+        $this->assertNotEmpty($errors['precious_user_id']['integer']);
+        $this->assertNotEmpty($errors['anniversary_type']['integer']);
+        $this->assertNotEmpty($errors['anniversary_date']['dateTime']);
+    }
+
+    /**
+     * RulesChecker 異常系 ユーザーIDと大切な人IDが存在しないとき
+     * @return void
+     */
+    public function testRulesCheckerFailedWithInvalidForeignKey()
+    {
+        $anniversary = $this->Anniversaries->newEntity([
+            'user_id' => 100,
+            'precious_user_id' => 100,
+            'anniversary_type' => 1,
+            'anniversary_date' => '2020-06-30 00:00:00',
+        ]);
+        $this->Anniversaries->save($anniversary);
+        $errors = $anniversary->getErrors();
+        $this->assertNotEmpty($errors['user_id']['_existsIn']);
+        $this->assertNotEmpty($errors['precious_user_id']['_existsIn']);
+    }
 }

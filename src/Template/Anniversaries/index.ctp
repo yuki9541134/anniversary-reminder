@@ -26,3 +26,5 @@
     </tr>
     <?php endforeach; ?>
 </table>
+
+<?= $this->Html->link('記念日を追加する', ['action' => 'new']) ?>

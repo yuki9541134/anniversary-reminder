@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Model\Entity\Anniversary;
 use App\Model\Table\AnniversariesTable;
 use Cake\ORM\Query;
 
@@ -30,5 +31,15 @@ class AnniversariesService extends AppService
     public function findAnniversaries(int $user_id): Query
     {
         return $this->Anniversaries->findAnniversaries($user_id);
+    }
+
+    /**
+     * 記念日を登録する
+     * @param Anniversary $anniversary
+     * @return Anniversary|bool
+     */
+    public function addAnniversary(Anniversary $anniversary)
+    {
+        return $this->Anniversaries->addAnniversary($anniversary);
     }
 } 

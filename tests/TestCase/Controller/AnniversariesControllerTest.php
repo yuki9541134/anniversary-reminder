@@ -37,6 +37,50 @@ class AnniversariesControllerTest extends IntegrationTestCase
     }
 
     /**
+     * 正常系
+     * @retrun void
+     */
+    public function testNew()
+    {
+        $this->get('/anniversaries/new');
+        $this->assertResponseOk();
+    }
+
+    /**
+     * 正常系
+     * @retrun void
+     */
+    public function testAdd()
+    {
+        $body = [
+            'user_id' => 1,
+            'precious_user_id' => 1,
+            'anniversary_type' => 1,
+            'anniversary_date' => '2020-01-01 00:00:00',
+        ];
+        $this->post('/anniversaries/add', $body);
+        $this->assertRedirect('/anniversaries/index');
+        $this->assertSession('記念日を追加しました。', 'Flash.flash.0.message');
+    }
+
+    /**
+     * 異常系 記念日の日付が空の時
+     * @retrun void
+     */
+    public function testAddFailed()
+    {
+        $body = [
+            'user_id' => 1,
+            'precious_user_id' => 1,
+            'anniversary_type' => 1,
+            'anniversary_date' => '',
+        ];
+        $this->post('/anniversaries/add', $body);
+        $this->assertRedirect('/anniversaries/new');
+        $this->assertSession('記念日の追加に失敗しました。', 'Flash.flash.0.message');
+    }
+
+    /**
      * 未ログイン時のアクセス制限のテスト
      * @retrun void
      */
@@ -46,6 +90,8 @@ class AnniversariesControllerTest extends IntegrationTestCase
 
         $routes = [
             ['url' => 'index', 'method' => 'get'],
+            ['url' => 'new', 'method' => 'get'],
+            ['url' => 'add', 'method' => 'post'],
         ];
         foreach ($routes as $route) {
             $url = '/anniversaries/' . $route['url'];

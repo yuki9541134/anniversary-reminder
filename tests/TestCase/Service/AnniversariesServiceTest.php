@@ -39,4 +39,31 @@ class AnniversariesServiceTest extends TestCase
         $result = $this->AnniversariesService->findAnniversaries(1);
         $this->assertInstanceOf('Cake\ORM\Query', $result);
     }
+
+    /**
+     * 正常系
+     * @return void
+     */
+    public function testAddAnniversary()
+    {
+        // setup
+        $anniversary = new Anniversary([
+            'user_id' => 1,
+            'precious_user_id' => 1,
+            'anniversary_type' => 1,
+            'anniversary_date' => '2020-06-30 00:00:00',
+        ]);
+
+        $Anniversaries = Mockery::mock('App\Model\Table\AnniversariesTable');
+        $Anniversaries->shouldReceive('addAnniversary')
+            ->with($anniversary)
+            ->once()
+            ->andReturn($anniversary);
+
+        $this->AnniversariesService = new AnniversariesService($Anniversaries);
+
+        // test
+        $result = $this->AnniversariesService->addAnniversary($anniversary);
+        $this->assertEquals($anniversary, $result);
+    }
 }
