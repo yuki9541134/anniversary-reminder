@@ -1,0 +1,32 @@
+name: Deploy master
+on: [ workflow_dispatch ]
+#  push:
+#    branches:
+#    - master
+#  pull_request:
+#    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout source code
+      uses: actions/checkout@v1
+
+    - name: Composer install
+      run: composer install
+
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+      
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v13
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: github-actions-deploy
+        environment_name: GithubActionsDeploy-env
+        version_label: Sample Application-7
+        region: ap-northeast-1
+        deployment_package: deploy.zip
