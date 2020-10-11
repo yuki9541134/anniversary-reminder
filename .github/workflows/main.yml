@@ -1,10 +1,7 @@
 name: Deploy master
 on: [ workflow_dispatch ]
-#  push:
-#    branches:
-#    - master
-#  pull_request:
-#    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -19,6 +16,10 @@ jobs:
 
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +%s)"
       
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v13
@@ -27,6 +28,6 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: github-actions-deploy
         environment_name: GithubActionsDeploy-env
-        version_label: Sample Application-7
+        version_label: Sample Application-${{ steps.date.outputs.date }}
         region: ap-northeast-1
         deployment_package: deploy.zip
